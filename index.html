@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#22302A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Baby Strauss">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<title>Baby Strauss Andrade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pine:#22302A;
+  --pine-soft:#3A4F45;
+  --euca:#4A7C64;
+  --euca-light:#E4EEE8;
+  --sage:#8FA69A;
+  --blush:#E8B4B8;
+  --blush-deep:#C98A90;
+  --paper:#F3F5F0;
+  --card:#FFFFFF;
+  --line:#DCE4DE;
+  --ok:#4A7C64;
+  --radius:20px;
+  --shadow:0 2px 12px rgba(34,48,42,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Figtree',system-ui,-apple-system,sans-serif;
+  background:var(--paper);
+  color:var(--pine);
+  line-height:1.55;
+  padding-bottom:96px;
+  min-height:100vh;
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px}
+
+/* ===== HERO ===== */
+header.hero{
+  background:var(--pine);
+  color:#F3F5F0;
+  padding:calc(env(safe-area-inset-top,0px) + 28px) 0 30px;
+  border-radius:0 0 32px 32px;
+}
+.hero .eyebrow{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blush);font-weight:600;margin-bottom:6px;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-weight:600;font-size:1.9rem;line-height:1.15;
+  margin-bottom:4px;
+}
+.hero .sub{color:#B9C7BF;font-size:.9rem;margin-bottom:22px}
+.tracker{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);
+  padding:18px;
+}
+.tracker .week-big{
+  font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;line-height:1;
+}
+.tracker .week-label{font-size:.8rem;color:#B9C7BF;margin-bottom:12px}
+.progress-track{
+  height:10px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;margin:10px 0 8px;
+}
+.progress-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--euca),var(--blush));
+  transition:width .8s ease;
+}
+.tracker .meta{display:flex;justify-content:space-between;font-size:.78rem;color:#B9C7BF}
+.fruit{
+  margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);
+  font-size:.92rem;display:flex;align-items:center;gap:10px;
+}
+.fruit .emoji{font-size:1.6rem}
+
+/* ===== TABS ===== */
+nav.tabs{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  padding:8px 6px calc(env(safe-area-inset-bottom,0px) + 8px);
+}
+.tabs .row{display:flex;max-width:680px;margin:0 auto}
+.tab-btn{
+  flex:1;background:none;border:0;font-family:inherit;
+  font-size:.62rem;font-weight:600;color:var(--sage);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 2px;cursor:pointer;border-radius:12px;
+  transition:color .2s;
+}
+.tab-btn .ico{font-size:1.25rem;line-height:1}
+.tab-btn.active{color:var(--euca)}
+.tab-btn.active .ico{transform:scale(1.1)}
+
+/* ===== SECTIONS ===== */
+main{padding-top:22px}
+.panel{display:none;animation:fadeIn .25s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h2.section-title{
+  font-family:'Fraunces',serif;font-weight:600;font-size:1.45rem;
+  margin:26px 0 4px;
+}
+p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
+
+.card{
+  background:var(--card);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:18px;margin-bottom:14px;
+  border:1px solid var(--line);
+}
+.card h3{
+  font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;margin-bottom:2px;
+}
+.card .when{
+  display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--euca);
+  background:var(--euca-light);border-radius:99px;padding:3px 10px;margin-bottom:8px;
+}
+.card .when.blush{color:var(--blush-deep);background:#F8E9EA}
+.card p.desc{font-size:.88rem;color:var(--pine-soft);margin-bottom:10px}
+
+/* checklist */
+.check-item{
+  display:flex;align-items:flex-start;gap:11px;
+  padding:10px 0;border-bottom:1px solid var(--line);
+}
+.check-item:last-child{border-bottom:0}
+.check-item input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;
+  width:23px;height:23px;min-width:23px;border-radius:8px;
+  border:2px solid var(--sage);background:#fff;cursor:pointer;
+  display:grid;place-content:center;margin-top:1px;
+  transition:all .18s;
+}
+.check-item input[type=checkbox]:checked{
+  background:var(--euca);border-color:var(--euca);
+}
+.check-item input[type=checkbox]:checked::after{
+  content:'✓';color:#fff;font-size:.85rem;font-weight:700;
+}
+.check-item label{font-size:.93rem;cursor:pointer;flex:1}
+.check-item.done label{color:var(--sage);text-decoration:line-through;text-decoration-color:rgba(143,166,154,.5)}
+.check-item .hint{display:block;font-size:.78rem;color:var(--sage);margin-top:2px;text-decoration:none!important}
+
+/* note fields */
+.note-field{margin:10px 0 4px}
+.note-field label{
+  display:block;font-size:.72rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sage);margin-bottom:4px;
+}
+.note-field input,.note-field textarea,.note-field select{
+  width:100%;font-family:inherit;font-size:.92rem;color:var(--pine);
+  background:var(--paper);border:1.5px solid var(--line);border-radius:12px;
+  padding:10px 12px;outline:none;transition:border .2s;
+}
+.note-field textarea{min-height:70px;resize:vertical}
+.note-field input:focus,.note-field textarea:focus,.note-field select:focus{border-color:var(--euca)}
+.saved-flash{font-size:.7rem;color:var(--euca);opacity:0;transition:opacity .3s;margin-left:6px}
+.saved-flash.show{opacity:1}
+
+/* accordion (exames) */
+.acc{border-bottom:1px solid var(--line)}
+.acc:last-child{border-bottom:0}
+.acc-head{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:12px 0;cursor:pointer;user-select:none;
+}
+.acc-head .t{font-weight:600;font-size:.92rem}
+.acc-head .w{font-size:.7rem;color:var(--euca);font-weight:700;white-space:nowrap}
+.acc-head .arrow{color:var(--sage);transition:transform .25s;font-size:.8rem}
+.acc.open .arrow{transform:rotate(180deg)}
+.acc-body{
+  display:none;font-size:.86rem;color:var(--pine-soft);padding:0 0 14px;
+}
+.acc.open .acc-body{display:block}
+
+/* radio pills */
+.pill-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pill{
+  border:1.5px solid var(--line);background:#fff;border-radius:99px;
+  padding:8px 16px;font-family:inherit;font-size:.85rem;font-weight:600;
+  color:var(--pine-soft);cursor:pointer;transition:all .18s;
+}
+.pill.selected{background:var(--euca);border-color:var(--euca);color:#fff}
+
+/* tips */
+.tip-card{
+  background:var(--card);border-radius:16px;border:1px solid var(--line);
+  padding:14px 16px;margin-bottom:10px;position:relative;
+}
+.tip-card .tip-text{font-size:.92rem;margin-bottom:6px}
+.tip-card .tip-meta{font-size:.75rem;color:var(--sage)}
+.tip-card .tip-cat{
+  display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--blush-deep);background:#F8E9EA;
+  border-radius:99px;padding:2px 9px;margin-right:6px;
+}
+.tip-del{
+  position:absolute;top:10px;right:12px;background:none;border:0;
+  color:var(--sage);font-size:1rem;cursor:pointer;padding:4px;
+}
+.btn{
+  display:inline-block;background:var(--euca);color:#fff;border:0;
+  font-family:inherit;font-weight:700;font-size:.9rem;
+  border-radius:14px;padding:12px 22px;cursor:pointer;
+  transition:transform .15s, background .2s;
+}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--euca-light);color:var(--euca)}
+
+/* book list */
+.book{
+  display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);
+  font-size:.88rem;
+}
+.book:last-child{border-bottom:0}
+.book .b-emoji{font-size:1.3rem}
+.book .b-title{font-weight:600}
+.book .b-note{color:var(--pine-soft);font-size:.8rem}
+
+/* misc */
+.callout{
+  background:var(--euca-light);border-radius:16px;padding:14px 16px;
+  font-size:.86rem;color:var(--pine);margin-bottom:14px;
+  border-left:4px solid var(--euca);
+}
+.callout.blush{background:#F8E9EA;border-left-color:var(--blush-deep)}
+.small-list{padding-left:18px;font-size:.87rem;color:var(--pine-soft)}
+.small-list li{margin-bottom:5px}
+.divider-label{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sage);margin:22px 0 8px;
+}
+.progress-mini{font-size:.74rem;color:var(--sage);font-weight:600}
+footer{
+  text-align:center;font-size:.75rem;color:var(--sage);
+  padding:30px 0 10px;
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Robert & Carolline · abril de 2027</div>
+    <h1>Baby Strauss Andrade</h1>
+    <div class="sub">Nosso guia até a chegada do bebê</div>
+    <div class="tracker">
+      <div class="week-big" id="weekBig">—</div>
+      <div class="week-label" id="weekLabel">calculando…</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="meta"><span>DUM 26/06/2026</span><span id="countdown">—</span><span>DPP ~02/04/2027</span></div>
+      <div class="fruit"><span class="emoji" id="fruitEmoji">🌱</span><span id="fruitText">—</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ PANEL: JORNADA ============ -->
+<section class="panel active" id="panel-jornada">
+
+  <h2 class="section-title">Nossas decisões</h2>
+  <p class="section-sub">O quadro-resumo do que já definimos e do que falta definir.</p>
+
+  <div class="card">
+    <div class="note-field"><label>Obstetra <span class="saved-flash" data-flash="n_obstetra">salvo ✓</span></label>
+      <input type="text" data-note="n_obstetra" placeholder="A definir na 1ª consulta de GO no CIM SJP"></div>
+    <div class="note-field"><label>Hospital / maternidade escolhida <span class="saved-flash" data-flash="n_hospital">salvo ✓</span></label>
+      <input type="text" data-note="n_hospital" placeholder="Ainda vamos visitar e decidir"></div>
+    <div class="note-field"><label>Pediatra <span class="saved-flash" data-flash="n_pediatra">salvo ✓</span></label>
+      <input type="text" data-note="n_pediatra" placeholder="Escolher entre 28–32 semanas"></div>
+    <div class="note-field"><label>Nome(s) do bebê 💛 <span class="saved-flash" data-flash="n_nomes">salvo ✓</span></label>
+      <input type="text" data-note="n_nomes" placeholder="Ideias em andamento…"></div>
+  </div>
+
+  <div class="card">
+    <h3>📣 Plano de anúncio</h3>
+    <span class="when blush">Decisões a dois 💛</span>
+    <p class="desc">O combinado: anúncio público só <strong>após as 12 semanas</strong> (~meados de setembro/2026).</p>
+    <div id="list-anuncio"></div>
+  </div>
+
+  <div class="divider-label">Checklists por fase</div>
+
+  <div id="jornadaLists"></div>
+
+</section>
+
+<!-- ============ PANEL: CONSULTAS ============ -->
+<section class="panel" id="panel-consultas">
+  <h2 class="section-title">Consultas & exames</h2>
+  <p class="section-sub">O mapa completo do pré-natal — o que acontece, quando, e o que significa cada nome estranho. 😄</p>
+
+  <div class="callout blush">
+    <strong>Como "ter um médico" na Paraná Clínicas:</strong> o plano é verticalizado — as consultas acontecem nas unidades próprias (o CIM SJP é a de vocês). O obstetra de referência nasce assim: agenda-se uma consulta de GO, e se gostarem do atendimento, os retornos são sempre marcados pelo nome daquele médico. O Gestar Bem (PRIORI) soma uma equipe multidisciplinar por cima, de graça.
+  </div>
+
+  <div class="callout">
+    <strong>O ritmo das consultas com o obstetra:</strong><br>
+    • Até 28 semanas → <strong>1x por mês</strong><br>
+    • De 28 a 36 semanas → <strong>a cada 15 dias</strong><br>
+    • De 36 semanas até o parto → <strong>1x por semana</strong>
+  </div>
+
+  <div class="card">
+    <h3>1º trimestre <span class="progress-mini">(agora até ~26/09/2026)</span></h3>
+    <div class="acc"><div class="acc-head"><span class="t">Consulta inicial de pré-natal</span><span class="w">6–8 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">A consulta que abre tudo: o médico confirma a gestação, calcula a idade gestacional, pede o pacote de exames de sangue e a primeira ultrassom, e prescreve as vitaminas (ácido fólico é a principal). Levem a lista de dúvidas por escrito — ninguém lembra de nada na hora.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Exames de sangue e urina do 1º tri</span><span class="w">logo após a 1ª consulta</span><span class="arrow">▼</span></div>
+      <div class="acc-body">O "pacotão" inicial: hemograma (anemia), tipagem sanguínea ABO/Rh (importante se a Carolline for Rh negativo), glicemia de jejum, TSH (tireoide), sorologias (toxoplasmose, rubéola, sífilis/VDRL, HIV, hepatites B e C), exame de urina tipo 1 + urocultura (infecção urinária é comum e precisa tratar). Tudo coberto pelo plano com pedido médico.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">USG transvaginal (ultrassom de datação)</span><span class="w">6–9 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">A primeira ultrassom! Confirma que o embrião está no lugar certo, mostra o batimento cardíaco (momento emocionante 🥹) e define a idade gestacional com precisão — o que pode ajustar a DPP.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">USG morfológica do 1º trimestre (translucência nucal)</span><span class="w">11–14 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Também chamada de "TN". Mede uma dobrinha na nuca do bebê e avalia risco de alterações cromossômicas. É a ultrassom mais importante do trimestre — agendem com antecedência porque a janela de datas é rígida.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">NIPT (opcional, particular)</span><span class="w">a partir de 10 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Exame de sangue que analisa o DNA fetal para rastrear síndromes cromossômicas — e de quebra revela o sexo bem cedo. Geralmente NÃO é coberto pelo plano (custa em torno de R$ 900–2.500 dependendo do laboratório). Totalmente opcional; conversem com o obstetra se faz sentido.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>2º trimestre <span class="progress-mini">(~26/09/2026 a ~09/01/2027)</span></h3>
+    <div class="acc"><div class="acc-head"><span class="t">USG morfológica do 2º trimestre</span><span class="w">20–24 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">A ultrassom mais completa e mais esperada: avalia órgão por órgão do bebê (coração, cérebro, rins, coluna…). É aqui que o sexo fica bem visível, se vocês quiserem saber. Dura mais que as outras — reservem tempo.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">TOTG — teste de tolerância à glicose</span><span class="w">24–28 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">O famoso (e chatinho) "exame da glicose": rastreia diabetes gestacional. Ela bebe um líquido bem doce e colhe sangue algumas vezes ao longo de ~2h. Dica: levar algo pra comer depois e companhia — você vai junto, né? 😄</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Vacinas da gestante</span><span class="w">a partir de 20 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body"><strong>dTpa</strong> (protege o bebê de coqueluche — se toma em toda gestação, a partir de 20 semanas), <strong>influenza</strong> (em qualquer fase, na temporada), <strong>hepatite B</strong> se ela não for vacinada, e COVID conforme recomendação vigente. Todas disponíveis na rede pública (UBS).</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Ecocardiograma fetal (se solicitado)</span><span class="w">24–28 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Ultrassom detalhada só do coração do bebê. Nem todo pré-natal pede — depende de histórico e achados da morfológica. Se o médico pedir, é rotina de cuidado, não motivo de susto.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Consulta odontológica</span><span class="w">2º tri é o ideal</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Pouca gente sabe: gengivite na gravidez é comum e vale prevenir. O 2º trimestre é a fase mais confortável e segura para tratamento dentário.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>3º trimestre <span class="progress-mini">(~09/01/2027 até o parto)</span></h3>
+    <div class="acc"><div class="acc-head"><span class="t">Repetição de exames de sangue</span><span class="w">~28 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Hemograma e algumas sorologias se repetem para checar anemia e infecções. Se a Carolline for Rh negativo, entra também o Coombs indireto (e possivelmente a vacina de imunoglobulina anti-D, coberta pelo plano).</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Pesquisa de Streptococcus do grupo B (GBS)</span><span class="w">35–37 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Um swab (cotonete) vaginal/retal simples que detecta uma bactéria comum e inofensiva para a mãe, mas que pede antibiótico durante o trabalho de parto para proteger o bebê. Exame rápido e indolor.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">USG obstétrica de crescimento</span><span class="w">32–36 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Avalia peso estimado do bebê, posição (de cabeça pra baixo?), líquido amniótico e placenta. Ajuda a conversa sobre a via de parto.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Consulta pré-natal com o pediatra</span><span class="w">~32–36 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Sim, existe consulta com pediatra ANTES de o bebê nascer! Serve para se conhecerem, alinhar condutas (amamentação, primeiras vacinas) e combinar se ele/ela atende na maternidade escolhida no dia do parto.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Pré-admissão na maternidade + avaliação anestésica</span><span class="w">~34–37 sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Cadastro antecipado no hospital (agiliza MUITO no dia) e, em muitas maternidades, uma consulta com o anestesista para avaliar histórico. Perguntem na maternidade escolhida como funciona.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Cardiotocografia (se necessário)</span><span class="w">37+ sem</span><span class="arrow">▼</span></div>
+      <div class="acc-body">Monitora batimentos do bebê e contrações, geralmente perto ou depois da DPP, ou se algo pedir vigilância extra. Ela fica deitada com sensores na barriga por ~20-40 min.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>📖 Mini-glossário</h3>
+    <div class="acc"><div class="acc-head"><span class="t">DUM, DPP, IG…</span><span class="arrow">▼</span></div>
+      <div class="acc-body"><strong>DUM</strong> = data da última menstruação (26/06/2026). <strong>DPP</strong> = data provável do parto (~02/04/2027). <strong>IG</strong> = idade gestacional, contada em semanas + dias a partir da DUM. <strong>USG</strong> = ultrassonografia. <strong>Beta-hCG</strong> = hormônio da gravidez, o exame que confirmou tudo (1640,80 no de vocês!).</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Termos do parto</span><span class="arrow">▼</span></div>
+      <div class="acc-body"><strong>Parto normal/vaginal</strong>: via natural, recuperação geralmente mais rápida. <strong>Cesárea</strong>: cirurgia, indicada por vários motivos ou por escolha em algumas situações. <strong>Trabalho de parto</strong>: as contrações regulares + dilatação. <strong>Bolsa rota</strong>: quando "a bolsa estoura". <strong>Doula</strong>: profissional de apoio físico/emocional (não substitui médico). <strong>Plano de parto</strong>: documento com as preferências de vocês — conversem sobre ele com o obstetra por volta de 30-34 semanas.</div></div>
+  </div>
+</section>
+
+<!-- ============ PANEL: ALIMENTAÇÃO ============ -->
+<section class="panel" id="panel-comida">
+  <h2 class="section-title">Alimentação por fase</h2>
+  <p class="section-sub">O essencial do que ajuda, o que evitar, e os mitos. (Orientações gerais — a nutricionista/obstetra da Carolline sempre têm a palavra final.)</p>
+
+  <div class="callout blush">
+    <strong>Mito nº 1:</strong> não é "comer por dois". No 1º trimestre não precisa de caloria extra; no 2º e 3º, só ~300–450 kcal a mais por dia (um lanche reforçado).
+  </div>
+
+  <div class="card">
+    <h3>🚫 Evitar durante TODA a gestação</h3>
+    <ul class="small-list">
+      <li><strong>Álcool: zero.</strong> Não existe dose segura.</li>
+      <li>Carnes, peixes e ovos <strong>crus ou malpassados</strong> (sushi com peixe cru, carpaccio, ovo mole) — risco de toxoplasmose e outras infecções.</li>
+      <li>Queijos <strong>não pasteurizados</strong> (alguns frescos artesanais) e leite cru.</li>
+      <li>Peixes com muito mercúrio: cação, peixe-espada, atum em excesso.</li>
+      <li>Cafeína: limitar a ~200 mg/dia (1–2 xícaras de café). Vale contar refri de cola e energético.</li>
+      <li>Adoçantes e ultraprocessados em excesso; cuidado com chás "naturais" — vários são contraindicados, sempre confirmar com o médico.</li>
+      <li>Lavar bem frutas/verduras e cuidado ao mexer com terra ou areia (toxoplasmose — a caixa de areia não, mas atenção com jardim; e quem limpa os "presentes" da Úrsula não é problema, toxoplasmose é de gato, não cachorro 🐶).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>1º trimestre — fundação e sobrevivência aos enjoos</h3>
+    <span class="when">Agora</span>
+    <ul class="small-list">
+      <li><strong>Ácido fólico</strong> religiosamente (previne má-formação do tubo neural) + vitaminas prescritas.</li>
+      <li>Contra enjoo: refeições <strong>pequenas e frequentes</strong> (a cada 2-3h), bolacha água e sal ao acordar antes de levantar, gengibre (chá ou bala), evitar cheiros fortes e frituras.</li>
+      <li>Hidratação constante — se vomitar muito, avisar o médico.</li>
+      <li>Se ela só conseguir comer poucas coisas nessas semanas, tudo bem — o bebê é minúsculo e as reservas dela dão conta. Sem culpa.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>2º trimestre — a fase de ouro</h3>
+    <span class="when">~Out/2026 a Jan/2027</span>
+    <ul class="small-list">
+      <li><strong>Ferro</strong> (carnes magras, feijão, folhas escuras) + vitamina C junto para absorver melhor (laranja no almoço!).</li>
+      <li><strong>Cálcio</strong>: leite, iogurte, queijos pasteurizados — o esqueleto do bebê está em obra.</li>
+      <li><strong>Ômega-3</strong> (cérebro do bebê): sardinha, salmão, ovos enriquecidos.</li>
+      <li><strong>Fibras + água</strong>: intestino preso é queixa clássica da gestação; aveia, frutas com casca, chia ajudam muito.</li>
+      <li>Moderar doces e massas refinadas — é a fase em que o corpo fica mais propenso à diabetes gestacional (por isso o TOTG).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>3º trimestre — reta final</h3>
+    <span class="when">Jan a Abr/2027</span>
+    <ul class="small-list">
+      <li>Refeições <strong>menores e mais frequentes</strong>: o bebê comprime o estômago e o refluxo aparece. Evitar deitar logo após comer.</li>
+      <li>Manter ferro e proteína (preparação para o parto e amamentação).</li>
+      <li><strong>Hidratação reforçada</strong> — ajuda até nas câimbras e no líquido amniótico.</li>
+      <li>Curiosidade com alguma evidência: <strong>tâmaras</strong> diárias nas últimas semanas podem favorecer o trabalho de parto. Baratinho de testar. 😄</li>
+      <li>Deixar já pensado o "kit lanche pós-parto" — amamentar dá uma fome épica.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="note-field"><label>Anotações de nutrição (orientações da médica/nutri) <span class="saved-flash" data-flash="n_nutri">salvo ✓</span></label>
+      <textarea data-note="n_nutri" placeholder="O que a equipe médica orientar especificamente para a Carolline…"></textarea></div>
+  </div>
+</section>
+
+<!-- ============ PANEL: CASA & FINANÇAS ============ -->
+<section class="panel" id="panel-casa">
+  <h2 class="section-title">Casa & finanças</h2>
+  <p class="section-sub">Organizando o ninho — e o bolso — com calma e sem sufoco.</p>
+
+  <div class="card">
+    <h3>🏠 Decisão: reforma ou decoração?</h3>
+    <p class="desc">Marquem o que decidirem (dá pra mudar depois):</p>
+    <div class="pill-group" data-radio="r_reforma">
+      <button class="pill" data-value="decoracao">Só decoração</button>
+      <button class="pill" data-value="leve">Reforma leve</button>
+      <button class="pill" data-value="estrutural">Reforma estrutural</button>
+      <button class="pill" data-value="indefinido">Ainda decidindo</button>
+    </div>
+    <div class="callout" style="margin-top:12px">
+      <strong>Regra de ouro do cronograma:</strong> qualquer obra com quebra-quebra, tinta e poeira precisa <strong>terminar até ~30 semanas (meados de janeiro/2027)</strong>. Gestante não deve conviver com poeira de obra e cheiro de tinta, e vocês vão querer o 3º trimestre em paz. Se for estrutural, o projeto e orçamento precisam começar <strong>agora (ago-set/2026)</strong>; se for só decoração, outubro-dezembro resolve tranquilo.
+    </div>
+    <ul class="small-list">
+      <li><strong>Se estrutural:</strong> fechar projeto e pedreiro até set/2026 → obra out-dez/2026 → janeiro pra limpeza e montagem.</li>
+      <li><strong>Se decoração:</strong> definir o cômodo do bebê até out/2026, comprar móveis grandes (berço, cômoda, poltrona de amamentação) até nov/2026 — prazo de entrega de móveis costuma ser 30-60 dias.</li>
+      <li>Tinta do quarto: usar tinta à base d'água, sem odor, e pintar com antecedência + ventilação.</li>
+      <li>Praticidade &gt; Pinterest: poltrona confortável pra amamentar de madrugada vale mais que qualquer item decorativo. 😄</li>
+    </ul>
+    <div class="note-field"><label>Anotações da casa (orçamentos, medidas, ideias) <span class="saved-flash" data-flash="n_casa">salvo ✓</span></label>
+      <textarea data-note="n_casa" placeholder="Orçamento do marceneiro, cor escolhida, links de referência…"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>💰 Organização financeira</h3>
+    <p class="desc">Três "caixinhas" mentais (ou reais, no banco) resolvem quase tudo:</p>
+    <ul class="small-list">
+      <li><strong>Caixinha 1 — Chegada (gasto único):</strong> enxoval, móveis, carrinho, bebê conforto, eventual obra/decoração. Meta: valor definido até out/2026 e compras diluídas até fev/2027. Black Friday (nov/2026) é excelente para carrinho, bebê conforto e eletrônicos como babá eletrônica.</li>
+      <li><strong>Caixinha 2 — Recorrente (novo custo mensal):</strong> fraldas (~R$ 200-350/mês no começo), plano de saúde do bebê como dependente, consultas/vacinas particulares se optarem, futura escolinha (essa vocês têm em casa 😄).</li>
+      <li><strong>Caixinha 3 — Colchão do puerpério:</strong> reserva para os 2-3 primeiros meses, considerando que a Carolline vai pausar a agenda por ~1 mês+ e a renda dela reduz temporariamente. Ideal: 2-3 meses do "custo de vida + bebê" guardados antes de março/2027.</li>
+    </ul>
+    <div class="callout blush">
+      <strong>Salário-maternidade da Carolline (autônoma):</strong> como contribuinte individual do INSS, ela tem direito a salário-maternidade de 120 dias, mas há <strong>carência de 10 contribuições mensais</strong>. Verifiquem JÁ com o contador se as contribuições dela estão em dia — começando agora, ainda dá tempo até abril/2027, mas cada mês conta.
+    </div>
+    <ul class="small-list">
+      <li>Enxoval: façam a lista antes de comprar qualquer coisa (bebê recém-nascido usa muito menos do que as lojas dizem). Priorizar: bebê conforto (obrigatório pra sair da maternidade), berço com colchão certificado, fraldas RN/P, roupinhas básicas, itens de amamentação.</li>
+      <li>Chá de bebê: além de festejar, é ajuda prática real — a lista de presentes bem-feita cobre boa parte da Caixinha 1.</li>
+      <li>Usar os pontos/milhas acumulados (Ultravioleta, Livelo) para trocar por produtos ou vale-compras pode aliviar o enxoval.</li>
+    </ul>
+    <div class="note-field"><label>Metas e valores das caixinhas <span class="saved-flash" data-flash="n_fin">salvo ✓</span></label>
+      <textarea data-note="n_fin" placeholder="Caixinha 1: R$ ___ | Caixinha 2: R$ ___/mês | Caixinha 3: R$ ___"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>💼 Trabalho — plano de vocês dois</h3>
+    <ul class="small-list">
+      <li><strong>Carolline (psicóloga autônoma):</strong> comunicar os pacientes com ~2 meses de antecedência (fev/2027); definir plano para cada paciente durante a pausa (encaminhamento temporário, contato de emergência, ou pausa combinada); reduzir a agenda gradualmente no 3º trimestre em vez de parar de uma vez; pausa mínima de 1 mês, retorno gradual conforme ela sentir.</li>
+      <li><strong>Robert (direção escolar):</strong> abril/2027 é meio do ano letivo — deixar mapeado até fev/2027 quem cobre o quê na escola nas 2-3 primeiras semanas; delegar com antecedência é presente pra você mesmo.</li>
+      <li><strong>Rede de apoio (a força de vocês 🙏):</strong> vale montar uma "escala carinhosa" — quem ajuda com comida na primeira semana, quem fica com a Úrsula nos dias do parto, quem é o contato que avisa todo mundo (pra vocês não responderem 200 mensagens da maternidade).</li>
+    </ul>
+    <div class="note-field"><label>Escala de apoio (quem faz o quê) <span class="saved-flash" data-flash="n_apoio">salvo ✓</span></label>
+      <textarea data-note="n_apoio" placeholder="Úrsula: ___ | Comidas semana 1: ___ | Porta-voz oficial: ___"></textarea></div>
+  </div>
+</section>
+
+<!-- ============ PANEL: PARTO ============ -->
+<section class="panel" id="panel-parto">
+  <h2 class="section-title">O grande dia</h2>
+  <p class="section-sub">Mala, documentos e o que esperar — pronto para qualquer via de parto.</p>
+
+  <div class="callout">
+    <strong>Quando montar a mala?</strong> Deixem tudo pronto até <strong>36 semanas (~início de março/2027)</strong>, na porta do quarto ou no porta-malas do 208. A mala serve igual para parto normal ou cesárea — o que muda é o tempo de internação (normal: ~2 dias; cesárea: ~3 dias), então na dúvida, leve para 3.
+  </div>
+
+  <div class="card">
+    <h3>📄 Documentos (numa pasta única)</h3>
+    <div id="list-docs"></div>
+  </div>
+
+  <div class="card">
+    <h3>👜 Mala da Carolline</h3>
+    <div id="list-malamae"></div>
+  </div>
+
+  <div class="card">
+    <h3>👶 Mala do bebê</h3>
+    <div id="list-malabebe"></div>
+  </div>
+
+  <div class="card">
+    <h3>🎒 Mochila do Robert (acompanhante)</h3>
+    <div id="list-malapai"></div>
+  </div>
+
+  <div class="card">
+    <h3>🚨 Sinais de "é agora" (quando ir pra maternidade)</h3>
+    <ul class="small-list">
+      <li><strong>Contrações regulares:</strong> a cada 5 minutos, durando ~1 minuto, por pelo menos 1 hora (regra 5-1-1).</li>
+      <li><strong>Bolsa rota:</strong> perda de líquido (mesmo sem dor) → ir direto, anotar a hora e a cor do líquido.</li>
+      <li><strong>Sangramento</strong> vivo em quantidade → ir imediatamente.</li>
+      <li><strong>Bebê parado:</strong> redução clara dos movimentos no 3º tri → ligar pro obstetra.</li>
+      <li>Salvem no celular: telefone do obstetra, da maternidade e o trajeto testado (com alternativa de horário de pico).</li>
+    </ul>
+    <div class="note-field"><label>Contatos e plano do dia D <span class="saved-flash" data-flash="n_diad">salvo ✓</span></label>
+      <textarea data-note="n_diad" placeholder="Tel. obstetra: ___ | Maternidade: ___ | Trajeto: ___ min | Quem avisa a família: ___"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Plano de parto — perguntas para levar ao obstetra (~30-34 sem)</h3>
+    <ul class="small-list">
+      <li>Qual via de parto ele recomenda e por quê? Como ele conduz se o trabalho de parto demorar?</li>
+      <li>O Robert pode acompanhar tudo (é direito por lei — Lei do Acompanhante nº 11.108)?</li>
+      <li>Contato pele a pele imediato e amamentação na primeira hora são prática padrão dele/da maternidade?</li>
+      <li>Clampeamento tardio do cordão? Quem corta o cordão?</li>
+      <li>Analgesia disponível 24h na maternidade escolhida?</li>
+    </ul>
+    <div class="note-field"><label>Nossas preferências de parto <span class="saved-flash" data-flash="n_planoparto">salvo ✓</span></label>
+      <textarea data-note="n_planoparto" placeholder="O que conversarmos e decidirmos com o médico…"></textarea></div>
+  </div>
+
+  <div class="card">
+    <h3>🍼 Primeiros dias pós-parto (para não se perder)</h3>
+    <div id="list-posparto"></div>
+  </div>
+</section>
+
+<!-- ============ PANEL: DICAS ============ -->
+<section class="panel" id="panel-dicas">
+  <h2 class="section-title">Dicas & aprendizados</h2>
+  <p class="section-sub">Tudo que médicos, família e amigos forem ensinando — guardado aqui pra não se perder no WhatsApp. 😄</p>
+
+  <div class="card">
+    <h3>➕ Adicionar dica</h3>
+    <div class="note-field"><label>A dica</label>
+      <textarea id="tipText" placeholder="Ex.: 'Levar meia grossa pra maternidade, o ar-condicionado é gelado'"></textarea></div>
+    <div class="note-field"><label>Quem indicou</label>
+      <input type="text" id="tipWho" placeholder="Ex.: Dra. Fulana / minha mãe / amiga Beatriz"></div>
+    <div class="note-field"><label>Categoria</label>
+      <select id="tipCat">
+        <option>Saúde</option><option>Enxoval</option><option>Parto</option>
+        <option>Pós-parto</option><option>Amamentação</option><option>Casa</option>
+        <option>Financeiro</option><option>Fé & família</option><option>Outros</option>
+      </select></div>
+    <button class="btn" id="tipAdd">Guardar dica</button>
+  </div>
+
+  <div id="tipsList"></div>
+
+  <div class="divider-label">Leituras que valem a pena</div>
+  <div class="card">
+    <div class="book"><span class="b-emoji">📗</span><div><div class="b-title">O que Esperar Quando Você Está Esperando — Heidi Murkoff</div><div class="b-note">O clássico mês a mês da gestação. Ótimo de consultar conforme as fases chegam.</div></div></div>
+    <div class="book"><span class="b-emoji">👶</span><div><div class="b-title">A Encantadora de Bebês — Tracy Hogg</div><div class="b-note">Rotinas, sono e "linguagem" do recém-nascido. Salva-vidas dos 3 primeiros meses.</div></div></div>
+    <div class="book"><span class="b-emoji">😴</span><div><div class="b-title">O Bebê Mais Feliz do Quarteirão — Harvey Karp</div><div class="b-note">Técnicas práticas para acalmar o choro (os famosos 5 S's). Leitura do Robert pro plantão da madrugada. 😄</div></div></div>
+    <div class="book"><span class="b-emoji">✝️</span><div><div class="b-title">Pastoreando o Coração da Criança — Tedd Tripp</div><div class="b-note">Referência de criação cristã centrada no evangelho. Mais para a fase seguinte, mas lindo de ler já grávidos.</div></div></div>
+    <div class="book"><span class="b-emoji">🙏</span><div><div class="b-title">Paternidade Sagrada — Gary Thomas</div><div class="b-note">Como criar filhos transforma a nossa própria alma. Devocional e profundo, para os dois.</div></div></div>
+  </div>
+</section>
+
+<footer>Feito com 💛 · Baby Strauss Andrade<br>Os dados ficam salvos apenas neste aparelho (localStorage).</footer>
+</main>
+
+<nav class="tabs">
+  <div class="row">
+    <button class="tab-btn active" data-panel="panel-jornada"><span class="ico">🌿</span>Jornada</button>
+    <button class="tab-btn" data-panel="panel-consultas"><span class="ico">🩺</span>Consultas</button>
+    <button class="tab-btn" data-panel="panel-comida"><span class="ico">🥗</span>Comida</button>
+    <button class="tab-btn" data-panel="panel-casa"><span class="ico">🏠</span>Casa & R$</button>
+    <button class="tab-btn" data-panel="panel-parto"><span class="ico">👶</span>Parto</button>
+    <button class="tab-btn" data-panel="panel-dicas"><span class="ico">💡</span>Dicas</button>
+  </div>
+</nav>
+
+<script>
+/* ================= STATE ================= */
+const KEY='ninho2027';
+let state={checks:{},notes:{},radios:{},tips:[]};
+try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+/* ================= WEEK TRACKER ================= */
+const DUM=new Date(2026,5,26); // 26/06/2026
+const DPP=new Date(2027,3,2);  // 02/04/2027
+const fruits=[
+ [4,'🌱','uma semente de papoula'],[5,'🍚','um grão de arroz'],[6,'🫛','uma ervilha'],
+ [7,'🫐','um mirtilo'],[8,'🫘','um feijão'],[9,'🍇','uma uva'],[10,'🍓','um morango'],
+ [11,'🥝','um damasco'],[12,'🍋','um limão'],[13,'🥭','uma vagem grande'],[14,'🍑','um pêssego'],
+ [15,'🍎','uma maçã'],[16,'🥑','um abacate'],[17,'🍐','uma pera grande'],[18,'🍠','uma batata-doce'],
+ [19,'🥒','um tomate grande'],[20,'🍌','uma banana'],[21,'🥕','uma cenoura'],[22,'🥥','um mamão papaia'],
+ [23,'🍆','uma manga grande'],[24,'🌽','uma espiga de milho'],[25,'🥦','uma couve-flor'],
+ [26,'🥬','um alface'],[27,'🥒','um pepino grande'],[28,'🍆','uma berinjela'],[29,'🎃','uma abóbora pequena'],
+ [30,'🥬','um repolho'],[31,'🥥','um coco'],[32,'🍈','uma jicama'],[33,'🍍','um abacaxi'],
+ [34,'🍈','um melão cantalupo'],[35,'🍯','um melão amarelo'],[36,'🥬','um pé de acelga'],
+ [37,'🍉','um mini melão'],[38,'🎃','uma abóbora'],[39,'🍉','uma melancia pequena'],[40,'🍉','uma melancia!']
+];
+function updateTracker(){
+  const now=new Date();
+  const days=Math.floor((now-DUM)/(1000*60*60*24));
+  const w=Math.floor(days/7),d=days%7;
+  const total=280;
+  const pct=Math.min(100,Math.max(0,(days/total)*100));
+  const left=Math.max(0,Math.ceil((DPP-now)/(1000*60*60*24)));
+  document.getElementById('weekBig').textContent=w+' sem '+(d>0?('+ '+d+'d'):'');
+  const tri=w<14?'1º trimestre':(w<28?'2º trimestre':'3º trimestre');
+  document.getElementById('weekLabel').textContent='de gestação · '+tri;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('countdown').textContent=left>0?('faltam ~'+left+' dias'):'chegou a hora! 💛';
+  let f=fruits[0];
+  for(const fr of fruits){if(w>=fr[0])f=fr;}
+  document.getElementById('fruitEmoji').textContent=f[1];
+  document.getElementById('fruitText').textContent='Seu bebê tem o tamanho de '+f[2];
+}
+updateTracker();
+
+/* ================= JORNADA CHECKLISTS ================= */
+const jornada=[
+ {id:'t1',title:'1º trimestre',when:'agora → ~26/09/2026',items:[
+  {id:'t1_consulta',t:'Agendar consulta de Ginecologia/Obstetrícia no CIM SJP',h:'Pelo app da Paraná Clínicas ou central (41) 3340-3000. Não precisa de encaminhamento. Levar dúvidas por escrito.'},
+  {id:'t1_referencia',t:'Definir o obstetra de referência nessa consulta',h:'Perguntar: "faz pré-natal completo? Posso marcar retornos sempre com você? Em qual maternidade acontece o parto — e quem faz o parto, você ou o plantonista?" Se não rolar conexão, testar outro nome da unidade.'},
+  {id:'t1_gestarbem',t:'Inscrever a Carolline no Gestar Bem (programa PRIORI)',h:'Acompanhamento extra gratuito do plano, no próprio CIM SJP: (41) 3340-3037 ou priori@paranaclinicas.com.br (8h–17h).'},
+  {id:'t1_usg',t:'Fazer a 1ª ultrassom (transvaginal de datação)',h:'6–9 semanas: batimento cardíaco 🥹'},
+  {id:'t1_exames',t:'Fazer o pacotão de exames de sangue e urina',h:'O médico entrega os pedidos na 1ª consulta.'},
+  {id:'t1_folico',t:'Carolline tomando ácido fólico diariamente',h:'Se ainda não começou, começar hoje.'},
+  {id:'t1_tn',t:'Agendar a morfológica do 1º tri (translucência nucal)',h:'Janela rígida: 11–14 semanas (~08/09 a 01/10/2026). Agendar com antecedência!'},
+  {id:'t1_inss',t:'Verificar contribuições INSS da Carolline com o contador',h:'Carência de 10 contribuições para o salário-maternidade de autônoma. Urgente e importante.'},
+  {id:'t1_maternidades',t:'Pesquisar maternidades da rede Paraná Clínicas e agendar visitas',h:'Priorizar as que têm UTI neonatal.'},
+  {id:'t1_pasta',t:'Criar a pasta de exames (física + Google Drive)',h:'Todo laudo entra nela no mesmo dia.'},
+  {id:'t1_pub',t:'Planejar o anúncio público (após 12 semanas ~ meados de set/2026)',h:'Núcleo próximo já sabe ✓'},
+ ]},
+ {id:'t2',title:'2º trimestre',when:'~out/2026 → jan/2027',items:[
+  {id:'t2_morfo',t:'Fazer a morfológica do 2º tri (20–24 sem)',h:'Janela: ~13/11 a 11/12/2026. Dá pra descobrir o sexo!'},
+  {id:'t2_reveal',t:'Decidir e fazer a revelação do sexo (se quiserem)',h:'Chá revelação, só a dois, com as famílias…'},
+  {id:'t2_totg',t:'Fazer o TOTG (exame da glicose, 24–28 sem)',h:'~dez/2026 a jan/2027. Robert vai junto de apoio moral. 😄'},
+  {id:'t2_dtpa',t:'Vacinas: dTpa (20+ sem) e influenza',h:'Disponíveis na UBS.'},
+  {id:'t2_casa',t:'Bater o martelo: decoração ou reforma? (aba Casa & R$)',h:'Se for obra, precisa acabar até ~jan/2027.'},
+  {id:'t2_moveis',t:'Comprar móveis grandes do quarto (berço, cômoda, poltrona)',h:'Entrega leva 30–60 dias. Black Friday em nov/2026 ajuda.'},
+  {id:'t2_enxoval',t:'Montar a lista de enxoval',h:'Antes de comprar qualquer coisa. Recém-nascido precisa de menos do que dizem.'},
+  {id:'t2_cha',t:'Planejar o chá de bebê',h:'Data boa: jan/fev 2027, com a lista de presentes pronta.'},
+  {id:'t2_curso',t:'Fazer curso de gestante/casal',h:'Maternidades e fisioterapeutas oferecem. Vale ouro na 1ª experiência.'},
+  {id:'t2_dentista',t:'Consulta odontológica da Carolline',h:'2º tri é a fase ideal e segura.'},
+  {id:'t2_fotos',t:'Pensar no ensaio gestante (fazer até ~34 sem)',h:'Agendar fotógrafo com antecedência.'},
+ ]},
+ {id:'t3',title:'3º trimestre',when:'~jan/2027 → o grande dia',items:[
+  {id:'t3_pediatra',t:'Escolher o pediatra e fazer a consulta pré-natal pediátrica',h:'28–34 sem. Confirmar se atende na maternidade escolhida.'},
+  {id:'t3_planoparto',t:'Conversar o plano de parto com o obstetra',h:'~30–34 sem. Perguntas prontas na aba Parto.'},
+  {id:'t3_preadm',t:'Fazer a pré-admissão na maternidade',h:'~34–37 sem. Agiliza tudo no dia D.'},
+  {id:'t3_gbs',t:'Exame GBS (swab, 35–37 sem)',h:'~fev-mar/2027.'},
+  {id:'t3_mala',t:'Malas prontas (as 3!) até 36 semanas',h:'~início de março/2027. Checklists na aba Parto.'},
+  {id:'t3_bebeconforto',t:'Instalar e testar o bebê conforto no 208',h:'A maternidade confere antes da alta.'},
+  {id:'t3_quarto',t:'Quarto do bebê montado e lavado (roupinhas com sabão neutro)',h:'Lavar roupa de bebê antes de usar é regra.'},
+  {id:'t3_escala',t:'Fechar a escala de apoio (Úrsula, comidas, porta-voz)',h:'Anotar na aba Casa & R$.'},
+  {id:'t3_trabalho',t:'Carolline: comunicar pacientes (~fev) · Robert: delegação na escola',h:'Detalhes na aba Casa & R$.'},
+  {id:'t3_congelar',t:'Congelar marmitas para as primeiras 2 semanas',h:'O melhor presente que vocês vão se dar.'},
+  {id:'t3_docs',t:'Pasta de documentos do dia D separada',h:'Checklist na aba Parto.'},
+ ]},
+];
+const jl=document.getElementById('jornadaLists');
+jornada.forEach(sec=>{
+  const card=document.createElement('div');card.className='card';
+  card.innerHTML='<h3>'+sec.title+' <span class="progress-mini" id="prog_'+sec.id+'"></span></h3><span class="when">'+sec.when+'</span>';
+  sec.items.forEach(it=>card.appendChild(makeCheck(it.id,it.t,it.h)));
+  jl.appendChild(card);
+});
+function makeCheck(id,text,hint){
+  const div=document.createElement('div');div.className='check-item';
+  const cb=document.createElement('input');cb.type='checkbox';cb.id='cb_'+id;
+  cb.checked=!!state.checks[id];
+  if(cb.checked)div.classList.add('done');
+  const lb=document.createElement('label');lb.htmlFor='cb_'+id;
+  lb.innerHTML=text+(hint?'<span class="hint">'+hint+'</span>':'');
+  cb.addEventListener('change',()=>{
+    state.checks[id]=cb.checked;save();
+    div.classList.toggle('done',cb.checked);
+    updateProgress();
+  });
+  div.appendChild(cb);div.appendChild(lb);
+  return div;
+}
+function updateProgress(){
+  jornada.forEach(sec=>{
+    const done=sec.items.filter(i=>state.checks[i.id]).length;
+    const el=document.getElementById('prog_'+sec.id);
+    if(el)el.textContent='· '+done+'/'+sec.items.length;
+  });
+}
+updateProgress();
+
+/* ================= MALAS / DOCS CHECKLISTS ================= */
+const listas={
+ 'list-anuncio':[
+  {id:'an_nucleo',t:'Contar para o núcleo próximo (família e melhores amigos)',h:'Só para quem apoiaria em qualquer cenário. ✓ vocês já fizeram!'},
+  {id:'an_formato',t:'Decidir juntos o formato do anúncio público',h:'Conversa a dois, sem pressa.'},
+  {id:'an_publico',t:'Fazer o anúncio público (após 12 semanas, ~meados de set/2026)'},
+  {id:'an_sexo_formato',t:'Decidir o formato da revelação do sexo',h:'Chá revelação, só a dois, com as famílias… decisão de vocês.'},
+  {id:'an_sexo',t:'Fazer a revelação do sexo 💙💗'},
+ ],
+ 'list-docs':[
+  {id:'d_rg',t:'RG e CPF dos dois'},
+  {id:'d_carteirinha',t:'Carteirinha Paraná Clínicas (app + física se tiver)'},
+  {id:'d_cartaogest',t:'Cartão de pré-natal / caderneta da gestante com todos os exames'},
+  {id:'d_casamento',t:'Certidão de casamento (facilita o registro do bebê)'},
+  {id:'d_planoparto',t:'Plano de parto impresso (2 cópias)'},
+  {id:'d_exames',t:'Últimos exames e ultrassons impressos'},
+ ],
+ 'list-malamae':[
+  {id:'m_camisolas',t:'3-4 camisolas ou pijamas com abertura frontal (amamentação)'},
+  {id:'m_robe',t:'Robe e chinelo confortável antiderrapante'},
+  {id:'m_calcinhas',t:'Calcinhas pós-parto (cintura alta, algodão) + absorventes pós-parto'},
+  {id:'m_sutia',t:'Sutiãs de amamentação + protetores de seio'},
+  {id:'m_higiene',t:'Nécessaire: shampoo, sabonete, hidratante, lip balm (ar-condicionado resseca), escova'},
+  {id:'m_meias',t:'Meias grossas (maternidade é gelada!)'},
+  {id:'m_saida_mae',t:'Roupa confortável para a alta (do tamanho ~6 meses de gestação)'},
+  {id:'m_pomada',t:'Pomada de lanolina para amamentação'},
+ ],
+ 'list-malabebe':[
+  {id:'b_bodies',t:'6 bodies (3 RN, 3 P) — abril = outono, levar manga curta e longa'},
+  {id:'b_macacoes',t:'6 macacões/mijões (3 RN, 3 P)'},
+  {id:'b_meias',t:'Meias, luvinhas e toucas (2-3 de cada)'},
+  {id:'b_mantas',t:'2 mantas (1 leve, 1 mais quente) + cueiros'},
+  {id:'b_fraldas',t:'1 pacote de fraldas RN + lenços umedecidos (ou algodão)'},
+  {id:'b_saida',t:'Saída de maternidade (a roupinha especial da alta 💛)'},
+  {id:'b_bebeconforto',t:'Bebê conforto instalado no carro (sem ele não há alta!)'},
+ ],
+ 'list-malapai':[
+  {id:'p_roupa',t:'2-3 trocas de roupa + agasalho'},
+  {id:'p_higiene',t:'Nécessaire básica + desodorante (você vai agradecer)'},
+  {id:'p_carregador',t:'Carregadores + power bank (fotos e transmissão pro grupo da família)'},
+  {id:'p_lanches',t:'Lanches e água (plantões são longos e a lanchonete fecha)'},
+  {id:'p_travesseiro',t:'Travesseiro pequeno / manta (a poltrona de acompanhante é honesta, mas dura)'},
+  {id:'p_dinheiro',t:'Dinheiro trocado/cartão para estacionamento e farmácia'},
+  {id:'p_lista',t:'Lista de quem avisar + quem é o porta-voz oficial'},
+ ],
+ 'list-posparto':[
+  {id:'pp_dnv',t:'Pegar a DNV (Declaração de Nascido Vivo) na maternidade — o hospital emite'},
+  {id:'pp_registro',t:'Registrar o bebê no cartório (até 15 dias; alguns hospitais têm posto de registro)'},
+  {id:'pp_plano',t:'Incluir o bebê no plano Paraná Clínicas dentro do prazo (confirmar: geralmente 30 dias, sem carência)'},
+  {id:'pp_pediatra1',t:'1ª consulta com o pediatra (na 1ª semana de vida)'},
+  {id:'pp_pezinho',t:'Teste do pezinho (entre o 3º e 5º dia de vida) + olhinho, orelhinha e coraçãozinho'},
+  {id:'pp_inss',t:'Carolline: dar entrada no salário-maternidade pelo Meu INSS'},
+  {id:'pp_cpf',t:'CPF do bebê (sai junto com a certidão no cartório)'},
+  {id:'pp_apoio',t:'Aceitar TODA ajuda oferecida. Sério. 😄'},
+ ],
+};
+Object.keys(listas).forEach(lid=>{
+  const cont=document.getElementById(lid);
+  if(cont)listas[lid].forEach(it=>cont.appendChild(makeCheck(it.id,it.t,it.h)));
+});
+
+/* ================= NOTES ================= */
+document.querySelectorAll('[data-note]').forEach(el=>{
+  const k=el.getAttribute('data-note');
+  if(state.notes[k])el.value=state.notes[k];
+  let t;
+  el.addEventListener('input',()=>{
+    clearTimeout(t);
+    t=setTimeout(()=>{
+      state.notes[k]=el.value;save();
+      const fl=document.querySelector('[data-flash="'+k+'"]');
+      if(fl){fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),1500);}
+    },500);
+  });
+});
+/* limpeza única: remove o pré-preenchimento antigo do plantonista */
+if(state.notes.n_obstetra==='Dr. Marcio Leandro Sasso'){
+  state.notes.n_obstetra='';
+  document.querySelector('[data-note="n_obstetra"]').value='';
+  save();
+}
+
+/* ================= RADIO PILLS ================= */
+document.querySelectorAll('[data-radio]').forEach(group=>{
+  const k=group.getAttribute('data-radio');
+  const btns=group.querySelectorAll('.pill');
+  function render(){btns.forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));}
+  btns.forEach(b=>b.addEventListener('click',()=>{state.radios[k]=b.dataset.value;save();render();}));
+  render();
+});
+
+/* ================= TIPS ================= */
+function renderTips(){
+  const box=document.getElementById('tipsList');
+  box.innerHTML='';
+  if(!state.tips.length){
+    box.innerHTML='<div class="callout">Nenhuma dica guardada ainda. Conforme médicos, família e amigos forem falando coisas boas, joguem aqui! 💡</div>';
+    return;
+  }
+  [...state.tips].reverse().forEach((tip)=>{
+    const idx=state.tips.indexOf(tip);
+    const el=document.createElement('div');el.className='tip-card';
+    el.innerHTML='<div class="tip-text">'+esc(tip.text)+'</div>'+
+      '<div class="tip-meta"><span class="tip-cat">'+esc(tip.cat)+'</span>'+esc(tip.who||'—')+' · '+tip.date+'</div>'+
+      '<button class="tip-del" title="Remover">✕</button>';
+    el.querySelector('.tip-del').addEventListener('click',()=>{
+      if(confirm('Remover esta dica?')){state.tips.splice(idx,1);save();renderTips();}
+    });
+    box.appendChild(el);
+  });
+}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+document.getElementById('tipAdd').addEventListener('click',()=>{
+  const text=document.getElementById('tipText').value.trim();
+  if(!text){alert('Escreva a dica primeiro 😄');return;}
+  state.tips.push({
+    text,who:document.getElementById('tipWho').value.trim(),
+    cat:document.getElementById('tipCat').value,
+    date:new Date().toLocaleDateString('pt-BR')
+  });
+  save();
+  document.getElementById('tipText').value='';document.getElementById('tipWho').value='';
+  renderTips();
+});
+renderTips();
+
+/* ================= ACCORDIONS ================= */
+document.querySelectorAll('.acc-head').forEach(h=>{
+  h.addEventListener('click',()=>h.parentElement.classList.toggle('open'));
+});
+
+/* ================= TABS ================= */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
