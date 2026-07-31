@@ -219,6 +219,15 @@ p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
 .btn:active{transform:scale(.97)}
 .btn.ghost{background:var(--euca-light);color:var(--euca)}
 
+.shop-cb{
+  appearance:none;-webkit-appearance:none;
+  width:23px;height:23px;min-width:23px;border-radius:8px;
+  border:2px solid var(--sage);background:#fff;cursor:pointer;
+  display:grid;place-content:center;margin-top:1px;transition:all .18s;
+}
+.shop-cb:checked{background:var(--euca);border-color:var(--euca)}
+.shop-cb:checked::after{content:'✓';color:#fff;font-size:.85rem;font-weight:700}
+
 /* book list */
 .book{
   display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);
@@ -262,6 +271,7 @@ footer{
       <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       <div class="meta"><span>DUM 26/06/2026</span><span id="countdown">—</span><span>DPP ~02/04/2027</span></div>
       <div class="fruit"><span class="emoji" id="fruitEmoji">🌱</span><span id="fruitText">—</span></div>
+      <div id="syncBadge" style="margin-top:10px;font-size:.72rem;font-weight:600;color:#B9C7BF">📱 dados só neste aparelho</div>
     </div>
   </div>
 </header>
@@ -276,9 +286,9 @@ footer{
 
   <div class="card">
     <div class="note-field"><label>Obstetra <span class="saved-flash" data-flash="n_obstetra">salvo ✓</span></label>
-      <input type="text" data-note="n_obstetra" placeholder="A definir na 1ª consulta de GO no CIM SJP"></div>
+      <input type="text" data-note="n_obstetra" placeholder="Dr. Marcio Leandro Sasso — CIM SJP"></div>
     <div class="note-field"><label>Hospital / maternidade escolhida <span class="saved-flash" data-flash="n_hospital">salvo ✓</span></label>
-      <input type="text" data-note="n_hospital" placeholder="Ainda vamos visitar e decidir"></div>
+      <input type="text" data-note="n_hospital" placeholder="Candidata: Maternidade Santa Cruz (41) 99288-6059 — visitar e confirmar"></div>
     <div class="note-field"><label>Pediatra <span class="saved-flash" data-flash="n_pediatra">salvo ✓</span></label>
       <input type="text" data-note="n_pediatra" placeholder="Escolher entre 28–32 semanas"></div>
     <div class="note-field"><label>Nome(s) do bebê 💛 <span class="saved-flash" data-flash="n_nomes">salvo ✓</span></label>
@@ -308,10 +318,11 @@ footer{
   </div>
 
   <div class="callout">
-    <strong>O ritmo das consultas com o obstetra:</strong><br>
-    • Até 28 semanas → <strong>1x por mês</strong><br>
-    • De 28 a 36 semanas → <strong>a cada 15 dias</strong><br>
-    • De 36 semanas até o parto → <strong>1x por semana</strong>
+    <strong>O ritmo das consultas (protocolo Gestar Bem — anotado na caderneta):</strong><br>
+    • Até 32 semanas → <strong>1x por mês</strong><br>
+    • De 32 a 36 semanas → <strong>a cada 15 dias</strong><br>
+    • De 36 semanas até o parto → <strong>1x por semana</strong><br>
+    <span style="font-size:.8rem;color:var(--pine-soft)">📔 A caderneta Gestar Bem agora é o documento oficial do pré-natal: vai junto em TODA consulta e entra na mala da maternidade.</span>
   </div>
 
   <div class="card">
@@ -365,6 +376,41 @@ footer{
     <div class="acc"><div class="acc-head"><span class="t">Termos do parto</span><span class="arrow">▼</span></div>
       <div class="acc-body"><strong>Parto normal/vaginal</strong>: via natural, recuperação geralmente mais rápida. <strong>Cesárea</strong>: cirurgia, indicada por vários motivos ou por escolha em algumas situações. <strong>Trabalho de parto</strong>: as contrações regulares + dilatação. <strong>Bolsa rota</strong>: quando "a bolsa estoura". <strong>Doula</strong>: profissional de apoio físico/emocional (não substitui médico). <strong>Plano de parto</strong>: documento com as preferências de vocês — conversem sobre ele com o obstetra por volta de 30-34 semanas.</div></div>
   </div>
+  <div class="card">
+    <h3>💊 Medicações da gestação</h3>
+    <span class="when">Receita de 31/07/2026 · Dr. Marcio Sasso · código MLA4WPP</span>
+    <div class="acc"><div class="acc-head"><span class="t">Uso diário (o essencial)</span><span class="arrow">▼</span></div>
+      <div class="acc-body"><strong>Femibion 1</strong> — 1 comprimido ao dia <strong>até 12 semanas</strong> (polivitamínico com ácido fólico ativo/metafolina). Depois troca para o <strong>Femibion 2</strong> — 1 ao dia <strong>após 12 semanas</strong> (traz DHA/ômega-3 para o cérebro do bebê). Cada caixa dura exatamente 1 mês.</div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Somente se precisar (sintomas)</span><span class="arrow">▼</span></div>
+      <div class="acc-body"><strong>Meclin 50 mg</strong> — 1 cp de 12/12h se enjoo · <strong>Simeco Plus</strong> — 10 mL de 8/8h se azia · <strong>Buscopan 10 mg</strong> — 1 cp de 6/6h se cólicas · <strong>Paracetamol 750 mg</strong> — 1 cp de 6/6h se dor. Se os sintomas apertarem além do que esses seguram, avisar o médico.</div></div>
+    <div class="callout blush" style="margin-top:12px">
+      <strong>Regra de ouro:</strong> na gestação, nenhum remédio novo por conta própria — nem anti-inflamatórios comuns (ibuprofeno, nimesulida), nem chás "naturais". Sempre confirmar com o obstetra ou farmacêutico antes.
+    </div>
+    <div class="note-field"><label>Novas receitas e orientações médicas <span class="saved-flash" data-flash="n_meds">salvo ✓</span></label>
+      <textarea data-note="n_meds" placeholder="Anotar aqui novas prescrições, ajustes de dose, códigos de receita…"></textarea></div>
+  </div>
+</section>
+
+<!-- ============ PANEL: COMPRAS ============ -->
+<section class="panel" id="panel-compras">
+  <h2 class="section-title">Carrinho da gestação</h2>
+  <p class="section-sub">Tudo que precisa ser comprado até (e depois de) abril — farmácia, enxoval, quarto, casa. Marquem quando comprarem. 🛒</p>
+
+  <div class="card">
+    <h3>➕ Adicionar item</h3>
+    <div class="note-field"><label>Item</label>
+      <input type="text" id="shopName" placeholder="Ex.: Femibion 2, berço, fraldas RN…"></div>
+    <div class="note-field"><label>Categoria</label>
+      <select id="shopCat">
+        <option>Farmácia</option><option>Enxoval</option><option>Quarto do bebê</option>
+        <option>Mala da maternidade</option><option>Casa</option><option>Pós-parto</option><option>Outros</option>
+      </select></div>
+    <div class="note-field"><label>Anotação (opcional: preço, onde comprar, quando)</label>
+      <input type="text" id="shopNote" placeholder="Ex.: ~R$ 100 na Mevo Shop · comprar em setembro"></div>
+    <button class="btn" id="shopAdd">Adicionar ao carrinho</button>
+  </div>
+
+  <div id="shopList"></div>
 </section>
 
 <!-- ============ PANEL: ALIMENTAÇÃO ============ -->
@@ -526,9 +572,10 @@ footer{
       <li><strong>Sangramento</strong> vivo em quantidade → ir imediatamente.</li>
       <li><strong>Bebê parado:</strong> redução clara dos movimentos no 3º tri → ligar pro obstetra.</li>
       <li>Salvem no celular: telefone do obstetra, da maternidade e o trajeto testado (com alternativa de horário de pico).</li>
+      <li><strong>Urgências em QUALQUER fase da gestação:</strong> a referência indicada pelo Gestar Bem é a Maternidade Santa Cruz — vale desde já, não só no parto.</li>
     </ul>
     <div class="note-field"><label>Contatos e plano do dia D <span class="saved-flash" data-flash="n_diad">salvo ✓</span></label>
-      <textarea data-note="n_diad" placeholder="Tel. obstetra: ___ | Maternidade: ___ | Trajeto: ___ min | Quem avisa a família: ___"></textarea></div>
+      <textarea data-note="n_diad" placeholder="Maternidade Santa Cruz: (41) 99288-6059 | Gestar Bem: (41) 3340-3037 | Trajeto: ___ min | Quem avisa a família: ___"></textarea></div>
   </div>
 
   <div class="card">
@@ -582,7 +629,7 @@ footer{
   </div>
 </section>
 
-<footer>Feito com 💛 · Baby Strauss Andrade<br>Os dados ficam salvos apenas neste aparelho (localStorage).</footer>
+<footer>Feito com 💛 · Baby Strauss Andrade<br>Com a nuvem ativa, tudo sincroniza entre os dois celulares; sem ela, os dados ficam neste aparelho.</footer>
 </main>
 
 <nav class="tabs">
@@ -592,16 +639,86 @@ footer{
     <button class="tab-btn" data-panel="panel-comida"><span class="ico">🥗</span>Comida</button>
     <button class="tab-btn" data-panel="panel-casa"><span class="ico">🏠</span>Casa & R$</button>
     <button class="tab-btn" data-panel="panel-parto"><span class="ico">👶</span>Parto</button>
+    <button class="tab-btn" data-panel="panel-compras"><span class="ico">🛒</span>Compras</button>
     <button class="tab-btn" data-panel="panel-dicas"><span class="ico">💡</span>Dicas</button>
   </div>
 </nav>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 <script>
+/* ================= NUVEM (Firebase) ================= */
+/* 👉 ÚNICO PASSO DE CONFIGURAÇÃO:
+   Cole aqui dentro os valores do "firebaseConfig" do seu projeto
+   (passo a passo completo no arquivo guia-firebase.md).
+   Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
+  authDomain: "baby-strauss-andrade.firebaseapp.com",
+  databaseURL: "https://baby-strauss-andrade-default-rtdb.firebaseio.com",
+  projectId: "baby-strauss-andrade",
+  storageBucket: "baby-strauss-andrade.firebasestorage.app",
+  messagingSenderId: "15301090530",
+  appId: "1:15301090530:web:23c735c8fd1e496b21d2bb"
+};
+/* O "endereço" da família na nuvem. Pode personalizar, mas os DOIS celulares
+   precisam usar o mesmo valor — e quanto mais único, mais privado. */
+const FAMILY_ID = "baby-strauss-andrade-abr2027";
+
 /* ================= STATE ================= */
 const KEY='ninho2027';
 let state={checks:{},notes:{},radios:{},tips:[]};
 try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+/* ================= SINCRONIZAÇÃO ================= */
+let db=null;
+function cloudSet(path,val){ if(db){ try{ db.child(path).set(val); }catch(e){} } }
+function setSync(mode){
+  const b=document.getElementById('syncBadge'); if(!b)return;
+  const map={local:['#B9C7BF','📱 dados só neste aparelho'],
+             on:['#7FB99A','☁️ sincronizado a dois'],
+             err:['#E8B4B8','⚠️ nuvem indisponível — usando modo local']};
+  b.style.color=map[mode][0]; b.textContent=map[mode][1];
+}
+function normArr(a){return Array.isArray(a)?a.filter(Boolean):(a?Object.values(a):[]);}
+function applyRemote(){
+  document.querySelectorAll('.check-item input[type=checkbox]').forEach(cb=>{
+    const id=cb.id.replace(/^cb_/,'');
+    const v=!!state.checks[id];
+    if(cb.checked!==v)cb.checked=v;
+    const item=cb.closest('.check-item'); if(item)item.classList.toggle('done',v);
+  });
+  updateProgress();
+  document.querySelectorAll('[data-note]').forEach(el=>{
+    if(document.activeElement===el)return; /* não sobrescrever enquanto digita */
+    const v=state.notes[el.getAttribute('data-note')]||'';
+    if(el.value!==v)el.value=v;
+  });
+  document.querySelectorAll('[data-radio]').forEach(group=>{
+    const k=group.getAttribute('data-radio');
+    group.querySelectorAll('.pill').forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));
+  });
+  renderTips();renderShop();
+}
+function cloudInit(){
+  if(!window.firebase || !FIREBASE_CONFIG.databaseURL){ setSync('local'); return; }
+  try{
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db=firebase.database().ref('familias/'+FAMILY_ID);
+    db.once('value').then(snap=>{
+      if(!snap.exists()){ db.set(state); } /* primeiro aparelho a conectar sobe os dados locais */
+      db.on('value',s=>{
+        const r=s.val(); if(!r)return;
+        state={checks:r.checks||{},notes:r.notes||{},radios:r.radios||{},
+               tips:normArr(r.tips),shop:normArr(r.shop)};
+        save();
+        applyRemote();
+        setSync('on');
+      },()=>setSync('err'));
+    }).catch(()=>setSync('err'));
+  }catch(e){ setSync('err'); }
+}
 
 /* ================= WEEK TRACKER ================= */
 const DUM=new Date(2026,5,26); // 26/06/2026
@@ -640,15 +757,16 @@ updateTracker();
 /* ================= JORNADA CHECKLISTS ================= */
 const jornada=[
  {id:'t1',title:'1º trimestre',when:'agora → ~26/09/2026',items:[
-  {id:'t1_consulta',t:'Agendar consulta de Ginecologia/Obstetrícia no CIM SJP',h:'Pelo app da Paraná Clínicas ou central (41) 3340-3000. Não precisa de encaminhamento. Levar dúvidas por escrito.'},
-  {id:'t1_referencia',t:'Definir o obstetra de referência nessa consulta',h:'Perguntar: "faz pré-natal completo? Posso marcar retornos sempre com você? Em qual maternidade acontece o parto — e quem faz o parto, você ou o plantonista?" Se não rolar conexão, testar outro nome da unidade.'},
-  {id:'t1_gestarbem',t:'Inscrever a Carolline no Gestar Bem (programa PRIORI)',h:'Acompanhamento extra gratuito do plano, no próprio CIM SJP: (41) 3340-3037 ou priori@paranaclinicas.com.br (8h–17h).'},
-  {id:'t1_usg',t:'Fazer a 1ª ultrassom (transvaginal de datação)',h:'6–9 semanas: batimento cardíaco 🥹'},
-  {id:'t1_exames',t:'Fazer o pacotão de exames de sangue e urina',h:'O médico entrega os pedidos na 1ª consulta.'},
-  {id:'t1_folico',t:'Carolline tomando ácido fólico diariamente',h:'Se ainda não começou, começar hoje.'},
-  {id:'t1_tn',t:'Agendar a morfológica do 1º tri (translucência nucal)',h:'Janela rígida: 11–14 semanas (~08/09 a 01/10/2026). Agendar com antecedência!'},
+  {id:'t1_consulta',t:'1ª consulta de pré-natal no CIM SJP',h:'✓ Feita em 31/07/2026 com o Dr. Marcio Sasso — pode marcar!'},
+  {id:'t1_referencia',t:'Escolher o obstetra de referência definitivo',h:'Dr. Marcio (gostamos!) x Dra. Mônica, que volta de férias em agosto — a Tatiane (PRIORI) pode agendar. Conhecer as duas opções e decidir com calma. Perguntar a ambos: em qual maternidade fazem o parto e quem conduz (médico ou plantonista)?'},
+  {id:'t1_gestarbem',t:'Carolline inscrita no Gestar Bem (PRIORI)',h:'✓ Caderneta em mãos! Contato direto: Tatiane, no PRIORI do CIM SJP (dá pra ir lá pessoalmente) · (41) 3340-3037.'},
+  {id:'t1_labs',t:'Coletar os exames laboratoriais (pedido nº 4147996)',h:'O pacotão completo: hemograma, tipagem + Coombs, glicemia, TSH, ferritina, vitamina D, sorologias (toxo, rubéola, CMV, HIV, hepatites B/C, HTLV, sífilis), urina + urocultura. Jejum para a glicemia; levar documento.'},
+  {id:'t1_usg1',t:'1ª ultrassom — 10/08/2026 às 17h15 (Dra. Caroline)',h:'Guia já autorizada. Dia de ouvir o coraçãozinho! 💓 Já está no calendário do iPhone.'},
+  {id:'t1_retorno',t:'Retorno com Dr. Marcio — 12/08/2026 às 07h15',h:'Ele avalia a USG e os exames. Levar caderneta + resultados + dúvidas por escrito.'},
+  {id:'t1_folico',t:'Carolline tomando o Femibion 1 diariamente',h:'O polivitamínico prescrito já cobre o ácido fólico. 1 cp/dia até 12 semanas.'},
+  {id:'t1_tn',t:'Agendar a morfológica do 1º tri (translucência nucal)',h:'Janela rígida: 11–14 semanas (~08/09 a 01/10/2026). Pedir o agendamento no retorno do dia 12/08!'},
   {id:'t1_inss',t:'Verificar contribuições INSS da Carolline com o contador',h:'Carência de 10 contribuições para o salário-maternidade de autônoma. Urgente e importante.'},
-  {id:'t1_maternidades',t:'Pesquisar maternidades da rede Paraná Clínicas e agendar visitas',h:'Priorizar as que têm UTI neonatal.'},
+  {id:'t1_maternidades',t:'Visitar maternidades: Santa Cruz (indicação Gestar Bem) e Santa Brígida',h:'Santa Cruz: (41) 99288-6059 — também é a referência para qualquer urgência da gestação desde já. Santa Brígida veio por indicação e também é da rede. Comparar UTI neonatal, estrutura e distância.'},
   {id:'t1_pasta',t:'Criar a pasta de exames (física + Google Drive)',h:'Todo laudo entra nela no mesmo dia.'},
   {id:'t1_pub',t:'Planejar o anúncio público (após 12 semanas ~ meados de set/2026)',h:'Núcleo próximo já sabe ✓'},
  ]},
@@ -661,7 +779,7 @@ const jornada=[
   {id:'t2_moveis',t:'Comprar móveis grandes do quarto (berço, cômoda, poltrona)',h:'Entrega leva 30–60 dias. Black Friday em nov/2026 ajuda.'},
   {id:'t2_enxoval',t:'Montar a lista de enxoval',h:'Antes de comprar qualquer coisa. Recém-nascido precisa de menos do que dizem.'},
   {id:'t2_cha',t:'Planejar o chá de bebê',h:'Data boa: jan/fev 2027, com a lista de presentes pronta.'},
-  {id:'t2_curso',t:'Fazer curso de gestante/casal',h:'Maternidades e fisioterapeutas oferecem. Vale ouro na 1ª experiência.'},
+  {id:'t2_curso',t:'Fazer o Curso Gestar Bem (~20 semanas, ~meados de nov/2026)',h:'Já anotado na caderneta: presencial, 8h às 15h. Confirmar a data pelo (41) 3340-3037.'},
   {id:'t2_dentista',t:'Consulta odontológica da Carolline',h:'2º tri é a fase ideal e segura.'},
   {id:'t2_fotos',t:'Pensar no ensaio gestante (fazer até ~34 sem)',h:'Agendar fotógrafo com antecedência.'},
  ]},
@@ -694,7 +812,7 @@ function makeCheck(id,text,hint){
   const lb=document.createElement('label');lb.htmlFor='cb_'+id;
   lb.innerHTML=text+(hint?'<span class="hint">'+hint+'</span>':'');
   cb.addEventListener('change',()=>{
-    state.checks[id]=cb.checked;save();
+    state.checks[id]=cb.checked;save();cloudSet('checks/'+id,cb.checked);
     div.classList.toggle('done',cb.checked);
     updateProgress();
   });
@@ -779,17 +897,17 @@ document.querySelectorAll('[data-note]').forEach(el=>{
   el.addEventListener('input',()=>{
     clearTimeout(t);
     t=setTimeout(()=>{
-      state.notes[k]=el.value;save();
+      state.notes[k]=el.value;save();cloudSet('notes/'+k,el.value);
       const fl=document.querySelector('[data-flash="'+k+'"]');
       if(fl){fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),1500);}
     },500);
   });
 });
-/* limpeza única: remove o pré-preenchimento antigo do plantonista */
-if(state.notes.n_obstetra==='Dr. Marcio Leandro Sasso'){
-  state.notes.n_obstetra='';
-  document.querySelector('[data-note="n_obstetra"]').value='';
-  save();
+/* obstetra confirmado na 1ª consulta (31/07/2026) — prefill se vazio */
+if(!state.notes.n_obstetra){
+  const ob=document.querySelector('[data-note="n_obstetra"]');
+  ob.value='Dr. Marcio Sasso (atual) · conhecer Dra. Mônica (volta em ago/2026)';
+  state.notes.n_obstetra=ob.value;save();
 }
 
 /* ================= RADIO PILLS ================= */
@@ -797,7 +915,7 @@ document.querySelectorAll('[data-radio]').forEach(group=>{
   const k=group.getAttribute('data-radio');
   const btns=group.querySelectorAll('.pill');
   function render(){btns.forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));}
-  btns.forEach(b=>b.addEventListener('click',()=>{state.radios[k]=b.dataset.value;save();render();}));
+  btns.forEach(b=>b.addEventListener('click',()=>{state.radios[k]=b.dataset.value;save();cloudSet('radios/'+k,b.dataset.value);render();}));
   render();
 });
 
@@ -816,7 +934,7 @@ function renderTips(){
       '<div class="tip-meta"><span class="tip-cat">'+esc(tip.cat)+'</span>'+esc(tip.who||'—')+' · '+tip.date+'</div>'+
       '<button class="tip-del" title="Remover">✕</button>';
     el.querySelector('.tip-del').addEventListener('click',()=>{
-      if(confirm('Remover esta dica?')){state.tips.splice(idx,1);save();renderTips();}
+      if(confirm('Remover esta dica?')){state.tips.splice(idx,1);save();cloudSet('tips',state.tips);renderTips();}
     });
     box.appendChild(el);
   });
@@ -830,11 +948,72 @@ document.getElementById('tipAdd').addEventListener('click',()=>{
     cat:document.getElementById('tipCat').value,
     date:new Date().toLocaleDateString('pt-BR')
   });
-  save();
+  save();cloudSet('tips',state.tips);
   document.getElementById('tipText').value='';document.getElementById('tipWho').value='';
   renderTips();
 });
 renderTips();
+
+/* ================= CARRINHO DE COMPRAS ================= */
+if(!state.shop){
+  state.shop=[
+    {id:'s1',name:'Femibion 1 (28 cp)',cat:'Farmácia',note:'1 caixa/mês até 12 semanas · comparar Mevo Shop x farmácias',done:false},
+    {id:'s2',name:'Femibion 2 (28 cp)',cat:'Farmácia',note:'comprar perto das 12 semanas (~meados de set/2026)',done:false},
+    {id:'s3',name:'Kit sintomas: Meclin, Simeco Plus, Buscopan, Paracetamol',cat:'Farmácia',note:'receita MLA4WPP · só ter em casa de plantão',done:false},
+    {id:'s4',name:'Bebê conforto',cat:'Enxoval',note:'obrigatório para a alta da maternidade · Black Friday nov/2026',done:false},
+    {id:'s5',name:'Berço + colchão certificado',cat:'Quarto do bebê',note:'comprar até nov/2026 (entrega 30-60 dias)',done:false},
+    {id:'s6',name:'Carrinho de bebê',cat:'Enxoval',note:'Black Friday nov/2026',done:false},
+    {id:'s7',name:'Cômoda/trocador',cat:'Quarto do bebê',note:'',done:false},
+    {id:'s8',name:'Poltrona de amamentação',cat:'Quarto do bebê',note:'conforto > estética 😄',done:false},
+    {id:'s9',name:'Fraldas RN e P (1º estoque)',cat:'Pós-parto',note:'não exagerar no RN, bebê cresce rápido',done:false},
+  ];
+  save();
+}
+function renderShop(){
+  const box=document.getElementById('shopList');
+  box.innerHTML='';
+  if(!state.shop.length){
+    box.innerHTML='<div class="callout">Carrinho vazio — adicionem os itens conforme forem surgindo! 🛒</div>';
+    return;
+  }
+  const pend=state.shop.filter(i=>!i.done), done=state.shop.filter(i=>i.done);
+  const addGroup=(title,items)=>{
+    if(!items.length)return;
+    const lbl=document.createElement('div');lbl.className='divider-label';
+    lbl.textContent=title+' ('+items.length+')';
+    box.appendChild(lbl);
+    items.forEach(item=>{
+      const idx=state.shop.indexOf(item);
+      const el=document.createElement('div');el.className='tip-card';
+      el.innerHTML='<div style="display:flex;gap:11px;align-items:flex-start">'+
+        '<input type="checkbox" class="shop-cb" '+(item.done?'checked':'')+'>'+
+        '<div style="flex:1"><div class="tip-text" style="'+(item.done?'color:var(--sage);text-decoration:line-through;':'')+'margin-bottom:4px">'+esc(item.name)+'</div>'+
+        '<div class="tip-meta"><span class="tip-cat">'+esc(item.cat)+'</span>'+(item.note?esc(item.note):'')+'</div></div></div>'+
+        '<button class="tip-del" title="Remover">✕</button>';
+      el.querySelector('input').addEventListener('change',e=>{item.done=e.target.checked;save();cloudSet('shop',state.shop);renderShop();});
+      el.querySelector('.tip-del').addEventListener('click',()=>{
+        if(confirm('Remover "'+item.name+'" do carrinho?')){state.shop.splice(idx,1);save();cloudSet('shop',state.shop);renderShop();}
+      });
+      box.appendChild(el);
+    });
+  };
+  addGroup('A comprar',pend);
+  addGroup('Já comprado ✓',done);
+}
+document.getElementById('shopAdd').addEventListener('click',()=>{
+  const name=document.getElementById('shopName').value.trim();
+  if(!name){alert('Escreva o item primeiro 😄');return;}
+  state.shop.push({
+    id:'s'+Date.now(),name,
+    cat:document.getElementById('shopCat').value,
+    note:document.getElementById('shopNote').value.trim(),
+    done:false
+  });
+  save();cloudSet('shop',state.shop);
+  document.getElementById('shopName').value='';document.getElementById('shopNote').value='';
+  renderShop();
+});
+renderShop();
 
 /* ================= ACCORDIONS ================= */
 document.querySelectorAll('.acc-head').forEach(h=>{
@@ -851,6 +1030,9 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
+
+/* liga a nuvem por último, com tudo renderizado */
+cloudInit();
 </script>
 </body>
 </html>
