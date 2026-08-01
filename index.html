@@ -424,7 +424,7 @@ footer{
     <h3>💊 Medicações da gestação</h3>
     <span class="when">Receita de 31/07/2026 · Dr. Marcio Sasso · código MLA4WPP</span>
     <div class="acc"><div class="acc-head"><span class="t">Uso diário (o essencial)</span><span class="arrow">▼</span></div>
-      <div class="acc-body"><strong>Femibion 1</strong> — 1 comprimido ao dia <strong>até 12 semanas</strong> (polivitamínico com ácido fólico ativo/metafolina). Depois troca para o <strong>Femibion 2</strong> — 1 ao dia <strong>após 12 semanas</strong> (traz DHA/ômega-3 para o cérebro do bebê). Cada caixa dura exatamente 1 mês.</div></div>
+      <div class="acc-body"><strong>Regenesis Premium</strong> — 1 dose ao dia durante <strong>toda a gestação</strong> (polivitamínico com folato ativo/metilfolato — escolha da Carol no lugar do Femibion 1→2 da receita original; confirmar a troca com o Dr. Marcio no retorno). Sem troca de fórmula nas 12 semanas: é o mesmo do início ao fim. 💊</div></div>
     <div class="acc"><div class="acc-head"><span class="t">Somente se precisar (sintomas)</span><span class="arrow">▼</span></div>
       <div class="acc-body"><strong>Meclin 50 mg</strong> — 1 cp de 12/12h se enjoo · <strong>Simeco Plus</strong> — 10 mL de 8/8h se azia · <strong>Buscopan 10 mg</strong> — 1 cp de 6/6h se cólicas · <strong>Paracetamol 750 mg</strong> — 1 cp de 6/6h se dor. Se os sintomas apertarem além do que esses seguram, avisar o médico.</div></div>
     <div class="callout blush" style="margin-top:12px">
@@ -814,7 +814,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.1.2';
+const APP_BUILD='2.1.3';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -923,7 +923,7 @@ const jornada=[
   {id:'t1_labs',t:'Coletar os exames laboratoriais (pedido nº 4147996)',h:'O pacotão completo: hemograma, tipagem + Coombs, glicemia, TSH, ferritina, vitamina D, sorologias (toxo, rubéola, CMV, HIV, hepatites B/C, HTLV, sífilis), urina + urocultura. Jejum para a glicemia; levar documento.'},
   {id:'t1_usg1',t:'1ª ultrassom — 10/08/2026 às 17h15 (Dra. Caroline)',h:'Guia já autorizada. Dia de ouvir o coraçãozinho! 💓 Já está no calendário do iPhone.'},
   {id:'t1_retorno',t:'Retorno com Dr. Marcio — 12/08/2026 às 07h15',h:'Ele avalia a USG e os exames. Levar caderneta + resultados + dúvidas por escrito.'},
-  {id:'t1_folico',t:'Carolline tomando o Femibion 1 diariamente',h:'O polivitamínico prescrito já cobre o ácido fólico. 1 cp/dia até 12 semanas.'},
+  {id:'t1_folico',t:'Carolline tomando o Regenesis Premium diariamente',h:'Polivitamínico com folato ativo, 1 dose/dia — o mesmo vale para a gestação inteira. Confirmar a troca (era Femibion na receita) com o Dr. Marcio no retorno.'},
   {id:'t1_tn',t:'Agendar a morfológica do 1º tri (translucência nucal)',h:'Janela rígida: 11–14 semanas (~08/09 a 01/10/2026). Pedir o agendamento no retorno do dia 12/08!'},
   {id:'t1_inss',t:'Verificar contribuições INSS da Carolline com o contador',h:'Carência de 10 contribuições para o salário-maternidade de autônoma. Urgente e importante.'},
   {id:'t1_maternidades',t:'Visitar maternidades: Santa Cruz (indicação Gestar Bem) e Santa Brígida',h:'Santa Cruz: (41) 99288-6059 — também é a referência para qualquer urgência da gestação desde já. Santa Brígida veio por indicação e também é da rede. Comparar UTI neonatal, estrutura e distância.'},
@@ -1269,8 +1269,7 @@ renderTips();
 const SHOP_CATS=['Farmácia','Enxoval','Quarto do bebê','Mala da maternidade','Casa','Pós-parto','Outros'];
 if(!state.shop){
   state.shop=[
-    {id:'s1',name:'Femibion 1 (28 cp)',cat:'Farmácia',note:'1 caixa/mês até 12 semanas · comparar Mevo Shop x farmácias',done:false},
-    {id:'s2',name:'Femibion 2 (28 cp)',cat:'Farmácia',note:'comprar perto das 12 semanas (~meados de set/2026)',done:false},
+    {id:'s1',name:'Regenesis Premium (30 cp)',cat:'Farmácia',note:'1 caixa/mês, gestação inteira · comparar preços (ML x farmácias)',done:false},
     {id:'s3',name:'Kit sintomas: Meclin, Simeco Plus, Buscopan, Paracetamol',cat:'Farmácia',note:'receita MLA4WPP · só ter em casa de plantão',done:false},
     {id:'s4',name:'Bebê conforto',cat:'Enxoval',note:'obrigatório para a alta da maternidade · Black Friday nov/2026',done:false},
     {id:'s5',name:'Berço + colchão certificado',cat:'Quarto do bebê',note:'comprar até nov/2026 (entrega 30-60 dias)',done:false},
@@ -1445,7 +1444,7 @@ document.getElementById('pesoAdd').addEventListener('click',()=>{
 document.getElementById('pesoData').value=localISO();
 
 const BINGO=[['prot','🍗 Proteína'],['fruta','🍎 Fruta'],['verd','🥦 Verduras'],['agua','💧 Água 2L'],
-             ['ferro','🫘 Ferro'],['calcio','🥛 Cálcio'],['vit','💊 Femibion'],['omega','🐟 Ômega-3']];
+             ['ferro','🫘 Ferro'],['calcio','🥛 Cálcio'],['vit','💊 Regenesis'],['omega','🐟 Ômega-3']];
 let bingoDay=null; /* null = hoje */
 function renderBingo(){
   const grid=document.getElementById('bingoGrid');if(!grid)return;
