@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="only light">
 <meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#22302A">
@@ -32,6 +32,8 @@
   --shadow:0 2px 12px rgba(34,48,42,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{touch-action:manipulation}
+input,textarea,select{touch-action:manipulation}
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:'Figtree',system-ui,-apple-system,sans-serif;
@@ -163,7 +165,7 @@ p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
   text-transform:uppercase;color:var(--sage);margin-bottom:4px;
 }
 .note-field input,.note-field textarea,.note-field select{
-  width:100%;font-family:inherit;font-size:.92rem;color:var(--pine);
+  width:100%;font-family:inherit;font-size:16px;color:var(--pine);
   background:var(--paper);border:1.5px solid var(--line);border-radius:12px;
   padding:10px 12px;outline:none;transition:border .2s;
 }
@@ -812,7 +814,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.1.0';
+const APP_BUILD='2.1.2';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -1640,6 +1642,11 @@ function checkUpdate(){
 }
 checkUpdate();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
+
+/* trava o zoom de pinça no iOS (o toque duplo já é tratado pelo touch-action no CSS) */
+['gesturestart','gesturechange','gestureend'].forEach(ev=>{
+  document.addEventListener(ev,e=>e.preventDefault(),{passive:false});
+});
 const vl=document.getElementById('verLabel');if(vl)vl.textContent='v'+APP_BUILD;
 
 /* liga a nuvem por último, com tudo renderizado */
