@@ -775,7 +775,7 @@ footer{
   </div>
 </section>
 
-<footer>Feito com 💛 · Baby Strauss Andrade<br>Com a nuvem ativa, tudo sincroniza entre os dois celulares; sem ela, os dados ficam neste aparelho.</footer>
+<footer>Feito com 💛 · Baby Strauss Andrade · <span id="verLabel"></span><br>Com a nuvem ativa, tudo sincroniza entre os dois celulares; sem ela, os dados ficam neste aparelho.</footer>
 </main>
 
 <nav class="tabs">
@@ -810,6 +810,10 @@ footer{
    Cole aqui dentro os valores do "firebaseConfig" do seu projeto
    (passo a passo completo no arquivo guia-firebase.md).
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
+/* Versão do app — o verificador de atualização compara este número
+   com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
+const APP_BUILD='2.1.0';
+
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
   authDomain: "baby-strauss-andrade.firebaseapp.com",
@@ -1608,6 +1612,35 @@ renderBingo();
 renderDiario();
 initFolds();
 renderTipFilters();
+
+/* ================= VERIFICADOR DE ATUALIZAÇÃO ================= */
+function showUpdateBanner(){
+  if(document.getElementById('updBanner'))return;
+  const b=document.createElement('button');
+  b.id='updBanner';
+  b.textContent='🔄 Nova versão disponível — toque para atualizar';
+  b.style.cssText='position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);z-index:200;'+
+    'background:var(--pine);color:#F3F5F0;border:1px solid rgba(255,255,255,.2);border-radius:99px;'+
+    'padding:10px 18px;font-family:inherit;font-weight:700;font-size:.82rem;box-shadow:0 4px 16px rgba(34,48,42,.35);cursor:pointer;'+
+    'max-width:92%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
+  b.addEventListener('click',()=>{
+    location.href=location.pathname+'?atualizado='+Date.now();
+  });
+  document.body.appendChild(b);
+}
+function checkUpdate(){
+  if(typeof fetch!=='function'||location.protocol==='file:')return;
+  fetch(location.pathname+'?chk='+Date.now(),{cache:'no-store'})
+    .then(r=>r.ok?r.text():'')
+    .then(t=>{
+      const m=t.match(/APP_BUILD\s*=\s*'([^']+)'/);
+      if(m&&m[1]!==APP_BUILD)showUpdateBanner();
+    })
+    .catch(()=>{});
+}
+checkUpdate();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
+const vl=document.getElementById('verLabel');if(vl)vl.textContent='v'+APP_BUILD;
 
 /* liga a nuvem por último, com tudo renderizado */
 cloudInit();
