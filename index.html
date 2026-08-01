@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
 <meta name="theme-color" content="#22302A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme: only light;
   --pine:#22302A;
   --pine-soft:#3A4F45;
   --euca:#4A7C64;
@@ -166,6 +169,10 @@ p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
 }
 .note-field textarea{min-height:70px;resize:vertical}
 .note-field input:focus,.note-field textarea:focus,.note-field select:focus{border-color:var(--euca)}
+.note-field input[type=date],.note-field input[type=datetime-local]{
+  min-width:0;-webkit-appearance:none;appearance:none;
+  display:block;min-height:44px;
+}
 .saved-flash{font-size:.7rem;color:var(--euca);opacity:0;transition:opacity .3s;margin-left:6px}
 .saved-flash.show{opacity:1}
 
@@ -227,6 +234,38 @@ p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
 }
 .shop-cb:checked{background:var(--euca);border-color:var(--euca)}
 .shop-cb:checked::after{content:'✓';color:#fff;font-size:.85rem;font-weight:700}
+
+/* editor (folha inferior) */
+.editor-overlay{position:fixed;inset:0;background:rgba(34,48,42,.45);z-index:100;display:none;align-items:flex-end}
+.editor-overlay.open{display:flex}
+.editor-sheet{background:#fff;border-radius:22px 22px 0 0;padding:20px 18px calc(env(safe-area-inset-bottom,0px) + 20px);width:100%;max-width:680px;margin:0 auto;max-height:80vh;overflow:auto}
+.editor-sheet h3{font-family:'Fraunces',serif;font-size:1.05rem;margin-bottom:10px}
+.editor-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.btn.danger{background:#C98A90}
+.btn.plain{background:var(--paper);color:var(--pine-soft)}
+.edit-pencil{background:none;border:0;color:var(--sage);font-size:.95rem;cursor:pointer;padding:4px 2px 4px 8px}
+.add-item-btn{width:100%;margin-top:10px;background:var(--euca-light);color:var(--euca);border:0;border-radius:12px;padding:10px;font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer}
+
+/* filtro de dicas */
+.filter-row{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;-webkit-overflow-scrolling:touch}
+.filter-row .pill{white-space:nowrap;padding:7px 14px;font-size:.8rem;flex:0 0 auto}
+
+/* bingo nutricional e gráfico de peso */
+.bingo-grid{display:flex;flex-wrap:wrap;gap:8px}
+#pesoChart svg{border-radius:12px;background:#FAFBF9}
+
+/* callouts dobráveis */
+.callout.foldc .foldc-head{display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.callout.foldc .fold-arrow{opacity:.55;font-size:.68rem;transition:transform .25s}
+.callout.foldc .fold-body{margin-top:8px}
+.callout.foldc.folded .fold-body{display:none}
+.callout.foldc.folded .fold-arrow{transform:rotate(-90deg)}
+
+/* cards dobráveis */
+.card.foldable > h3{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card.foldable .fold-arrow{color:var(--sage);font-size:.72rem;transition:transform .25s}
+.card.folded .fold-body{display:none}
+.card.folded .fold-arrow{transform:rotate(-90deg)}
 
 /* book list */
 .book{
@@ -313,16 +352,19 @@ footer{
   <h2 class="section-title">Consultas & exames</h2>
   <p class="section-sub">O mapa completo do pré-natal — o que acontece, quando, e o que significa cada nome estranho. 😄</p>
 
-  <div class="callout blush">
-    <strong>Como "ter um médico" na Paraná Clínicas:</strong> o plano é verticalizado — as consultas acontecem nas unidades próprias (o CIM SJP é a de vocês). O obstetra de referência nasce assim: agenda-se uma consulta de GO, e se gostarem do atendimento, os retornos são sempre marcados pelo nome daquele médico. O Gestar Bem (PRIORI) soma uma equipe multidisciplinar por cima, de graça.
+  <div class="callout blush foldc folded">
+    <div class="foldc-head"><strong>Como "ter um médico" na Paraná Clínicas</strong><span class="fold-arrow">▼</span></div>
+    <div class="fold-body">O plano é verticalizado — as consultas acontecem nas unidades próprias (o CIM SJP é a de vocês). O obstetra de referência nasce assim: agenda-se uma consulta de GO, e se gostarem do atendimento, os retornos são sempre marcados pelo nome daquele médico. O Gestar Bem (PRIORI) soma uma equipe multidisciplinar por cima, de graça.</div>
   </div>
 
-  <div class="callout">
-    <strong>O ritmo das consultas (protocolo Gestar Bem — anotado na caderneta):</strong><br>
+  <div class="callout foldc">
+    <div class="foldc-head"><strong>O ritmo das consultas (protocolo Gestar Bem)</strong><span class="fold-arrow">▼</span></div>
+    <div class="fold-body">
     • Até 32 semanas → <strong>1x por mês</strong><br>
     • De 32 a 36 semanas → <strong>a cada 15 dias</strong><br>
     • De 36 semanas até o parto → <strong>1x por semana</strong><br>
     <span style="font-size:.8rem;color:var(--pine-soft)">📔 A caderneta Gestar Bem agora é o documento oficial do pré-natal: vai junto em TODA consulta e entra na mala da maternidade.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -423,6 +465,107 @@ footer{
   </div>
 
   <div class="card">
+    <h3>📈 Peso na gestação</h3>
+    <p class="desc">Registre o peso 1x por semana. A faixa verde é o ganho saudável para o IMC pré-gestacional — o alvo é subir DENTRO dela, nunca emagrecer. A nutri do Gestar Bem acompanha junto.</p>
+    <div style="display:flex;gap:10px">
+      <div class="note-field" style="flex:1"><label>Altura (m)</label>
+        <input data-note="n_altura" inputmode="decimal" placeholder="1,65"></div>
+      <div class="note-field" style="flex:1"><label>Peso pré-gestação (kg)</label>
+        <input data-note="n_peso_pre" inputmode="decimal" placeholder="55"></div>
+    </div>
+    <div id="pesoInfo" class="tip-meta" style="margin:4px 0 10px"></div>
+    <div id="pesoChart"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div class="note-field" style="margin:0"><label>Data</label>
+        <input id="pesoData" type="date"></div>
+      <div class="note-field" style="margin:0"><label>Peso (kg)</label>
+        <input id="pesoKg" inputmode="decimal" placeholder="Ex.: 56,4"></div>
+    </div>
+    <button class="btn" id="pesoAdd" style="width:100%;margin-top:10px">Registrar peso</button>
+    <div id="pesoList" style="margin-top:8px"></div>
+  </div>
+
+  <div class="card">
+    <h3>🎯 Bingo nutricional</h3>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+      <button class="edit-pencil" id="bingoPrev" style="font-size:1.1rem">◀</button>
+      <p class="desc" id="bingoDate" style="margin:0;text-align:center;flex:1"></p>
+      <button class="edit-pencil" id="bingoNext" style="font-size:1.1rem">▶</button>
+    </div>
+    <div class="bingo-grid" id="bingoGrid"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+      <strong id="bingoScore" style="font-size:.9rem"></strong>
+      <div id="bingoHist"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🗒️ Diário alimentar</h3>
+    <p class="desc">Anotem alguns dias antes da consulta com a nutri — vira um retrato honesto da rotina, muito melhor que a memória. 😄</p>
+    <div class="note-field"><label>Quando</label>
+      <input id="diarioQuando" type="datetime-local"></div>
+    <div class="note-field"><label>Refeição</label>
+      <select id="diarioTipo">
+        <option>Café da manhã</option><option>Lanche da manhã</option><option>Almoço</option>
+        <option>Lanche da tarde</option><option>Jantar</option><option>Ceia/Extra</option>
+      </select></div>
+    <div class="note-field"><label>O que comeu/bebeu</label>
+      <textarea id="diarioDesc" placeholder="Ex.: 2 fatias de pão integral, ovo mexido, mamão e café com leite"></textarea></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" id="diarioAdd">Registrar</button>
+      <button class="btn ghost" id="diarioCopy">📤 Copiar relatório (7 dias)</button>
+    </div>
+    <div id="diarioList" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <h3>📅 Cardápio da semana</h3>
+    <p class="desc">O almoço dos dias úteis já vem da escola 🏫 — aqui vocês planejam o resto em volta dele.</p>
+    <div class="acc"><div class="acc-head"><span class="t">Segunda</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_seg_cafe" placeholder="Ex.: ovos + fruta + café"></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_seg_alm" placeholder="Cardápio da escola 🏫"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_seg_jan" placeholder="Ex.: sopa de legumes com frango"></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Terça</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_ter_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_ter_alm" placeholder="Cardápio da escola 🏫"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_ter_jan" placeholder=""></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Quarta</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_qua_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_qua_alm" placeholder="Cardápio da escola 🏫"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_qua_jan" placeholder=""></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Quinta</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_qui_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_qui_alm" placeholder="Cardápio da escola 🏫"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_qui_jan" placeholder=""></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Sexta</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_sex_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_sex_alm" placeholder="Cardápio da escola 🏫"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_sex_jan" placeholder=""></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Sábado</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_sab_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_sab_alm" placeholder="Fim de semana: vocês no comando 😄"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_sab_jan" placeholder=""></div>
+      </div></div>
+    <div class="acc"><div class="acc-head"><span class="t">Domingo</span><span class="arrow">▼</span></div>
+      <div class="acc-body">
+        <div class="note-field"><label>Café da manhã</label><input data-note="cd_dom_cafe" placeholder=""></div>
+        <div class="note-field"><label>Almoço</label><input data-note="cd_dom_alm" placeholder="Almoço em família?"></div>
+        <div class="note-field"><label>Jantar</label><input data-note="cd_dom_jan" placeholder=""></div>
+      </div></div>
+  </div>
+
+  <div class="card">
     <h3>🚫 Evitar durante TODA a gestação</h3>
     <ul class="small-list">
       <li><strong>Álcool: zero.</strong> Não existe dose segura.</li>
@@ -490,8 +633,9 @@ footer{
       <button class="pill" data-value="estrutural">Reforma estrutural</button>
       <button class="pill" data-value="indefinido">Ainda decidindo</button>
     </div>
-    <div class="callout" style="margin-top:12px">
-      <strong>Regra de ouro do cronograma:</strong> qualquer obra com quebra-quebra, tinta e poeira precisa <strong>terminar até ~30 semanas (meados de janeiro/2027)</strong>. Gestante não deve conviver com poeira de obra e cheiro de tinta, e vocês vão querer o 3º trimestre em paz. Se for estrutural, o projeto e orçamento precisam começar <strong>agora (ago-set/2026)</strong>; se for só decoração, outubro-dezembro resolve tranquilo.
+    <div class="callout foldc folded" style="margin-top:12px">
+      <div class="foldc-head"><strong>Regra de ouro do cronograma da obra</strong><span class="fold-arrow">▼</span></div>
+      <div class="fold-body">Qualquer obra com quebra-quebra, tinta e poeira precisa <strong>terminar até ~30 semanas (meados de janeiro/2027)</strong>. Gestante não deve conviver com poeira de obra e cheiro de tinta, e vocês vão querer o 3º trimestre em paz. Se for estrutural, o projeto e orçamento precisam começar <strong>agora (ago-set/2026)</strong>; se for só decoração, outubro-dezembro resolve tranquilo.</div>
     </div>
     <ul class="small-list">
       <li><strong>Se estrutural:</strong> fechar projeto e pedreiro até set/2026 → obra out-dez/2026 → janeiro pra limpeza e montagem.</li>
@@ -540,8 +684,9 @@ footer{
   <h2 class="section-title">O grande dia</h2>
   <p class="section-sub">Mala, documentos e o que esperar — pronto para qualquer via de parto.</p>
 
-  <div class="callout">
-    <strong>Quando montar a mala?</strong> Deixem tudo pronto até <strong>36 semanas (~início de março/2027)</strong>, na porta do quarto ou no porta-malas do 208. A mala serve igual para parto normal ou cesárea — o que muda é o tempo de internação (normal: ~2 dias; cesárea: ~3 dias), então na dúvida, leve para 3.
+  <div class="callout foldc folded">
+    <div class="foldc-head"><strong>🧳 Quando montar a mala? Até 36 semanas</strong><span class="fold-arrow">▼</span></div>
+    <div class="fold-body">Deixem tudo pronto até <strong>36 semanas (~início de março/2027)</strong>, na porta do quarto ou no porta-malas do 208. A mala serve igual para parto normal ou cesárea — o que muda é o tempo de internação (normal: ~2 dias; cesárea: ~3 dias), então na dúvida, leve para 3.</div>
   </div>
 
   <div class="card">
@@ -617,6 +762,7 @@ footer{
     <button class="btn" id="tipAdd">Guardar dica</button>
   </div>
 
+  <div class="filter-row" id="tipFilters"></div>
   <div id="tipsList"></div>
 
   <div class="divider-label">Leituras que valem a pena</div>
@@ -644,6 +790,18 @@ footer{
   </div>
 </nav>
 
+<div class="editor-overlay" id="editorOverlay">
+  <div class="editor-sheet">
+    <h3 id="edTitle">Editar</h3>
+    <div id="edFields"></div>
+    <div class="editor-actions">
+      <button class="btn" id="edSave">Salvar</button>
+      <button class="btn danger" id="edDelete" style="display:none">Remover</button>
+      <button class="btn plain" id="edCancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 <script>
@@ -667,7 +825,7 @@ const FAMILY_ID = "baby-strauss-andrade-abr2027";
 
 /* ================= STATE ================= */
 const KEY='ninho2027';
-let state={checks:{},notes:{},radios:{},tips:[]};
+let state={checks:{},notes:{},radios:{},tips:[],shop:null,custom:{},edits:{},hidden:{},peso:[],bingo:{},diario:[]};
 try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 
@@ -683,13 +841,7 @@ function setSync(mode){
 }
 function normArr(a){return Array.isArray(a)?a.filter(Boolean):(a?Object.values(a):[]);}
 function applyRemote(){
-  document.querySelectorAll('.check-item input[type=checkbox]').forEach(cb=>{
-    const id=cb.id.replace(/^cb_/,'');
-    const v=!!state.checks[id];
-    if(cb.checked!==v)cb.checked=v;
-    const item=cb.closest('.check-item'); if(item)item.classList.toggle('done',v);
-  });
-  updateProgress();
+  rerenderChecklists();
   document.querySelectorAll('[data-note]').forEach(el=>{
     if(document.activeElement===el)return; /* não sobrescrever enquanto digita */
     const v=state.notes[el.getAttribute('data-note')]||'';
@@ -699,7 +851,7 @@ function applyRemote(){
     const k=group.getAttribute('data-radio');
     group.querySelectorAll('.pill').forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));
   });
-  renderTips();renderShop();
+  renderTips();renderShop();renderPeso();renderBingo();renderDiario();
 }
 function cloudInit(){
   if(!window.firebase || !FIREBASE_CONFIG.databaseURL){ setSync('local'); return; }
@@ -711,7 +863,9 @@ function cloudInit(){
       db.on('value',s=>{
         const r=s.val(); if(!r)return;
         state={checks:r.checks||{},notes:r.notes||{},radios:r.radios||{},
-               tips:normArr(r.tips),shop:normArr(r.shop)};
+               tips:normArr(r.tips),shop:normArr(r.shop),
+               custom:r.custom||{},edits:r.edits||{},hidden:r.hidden||{},
+               peso:normArr(r.peso),bingo:r.bingo||{},diario:normArr(r.diario)};
         save();
         applyRemote();
         setSync('on');
@@ -797,36 +951,153 @@ const jornada=[
   {id:'t3_docs',t:'Pasta de documentos do dia D separada',h:'Checklist na aba Parto.'},
  ]},
 ];
-const jl=document.getElementById('jornadaLists');
-jornada.forEach(sec=>{
-  const card=document.createElement('div');card.className='card';
-  card.innerHTML='<h3>'+sec.title+' <span class="progress-mini" id="prog_'+sec.id+'"></span></h3><span class="when">'+sec.when+'</span>';
-  sec.items.forEach(it=>card.appendChild(makeCheck(it.id,it.t,it.h)));
-  jl.appendChild(card);
+/* ================= EDITOR (bottom-sheet) ================= */
+let edCfg=null;
+function openEditor(cfg){
+  edCfg=cfg;
+  document.getElementById('edTitle').textContent=cfg.title;
+  const box=document.getElementById('edFields');box.innerHTML='';
+  cfg.fields.forEach(f=>{
+    const w=document.createElement('div');w.className='note-field';
+    const l=document.createElement('label');l.textContent=f.label;w.appendChild(l);
+    let inp;
+    if(f.type==='select'){
+      inp=document.createElement('select');
+      f.options.forEach(o=>{const op=document.createElement('option');op.textContent=o;inp.appendChild(op);});
+      inp.value=f.value||f.options[0];
+    }else if(f.type==='input'){
+      inp=document.createElement('input');inp.type='text';inp.value=f.value||'';
+    }else{
+      inp=document.createElement('textarea');inp.value=f.value||'';
+    }
+    inp.id='ed_'+f.key;w.appendChild(inp);box.appendChild(w);
+  });
+  document.getElementById('edDelete').style.display=cfg.onDelete?'inline-block':'none';
+  document.getElementById('edSave').style.display=cfg.noSave?'none':'inline-block';
+  document.getElementById('editorOverlay').classList.add('open');
+}
+function closeEditor(){document.getElementById('editorOverlay').classList.remove('open');edCfg=null;}
+document.getElementById('edCancel').addEventListener('click',closeEditor);
+document.getElementById('editorOverlay').addEventListener('click',e=>{if(e.target.id==='editorOverlay')closeEditor();});
+document.getElementById('edSave').addEventListener('click',()=>{
+  if(!edCfg)return;
+  const vals={};edCfg.fields.forEach(f=>{vals[f.key]=document.getElementById('ed_'+f.key).value.trim();});
+  const keep=edCfg;
+  if(keep.onSave(vals)!==false)closeEditor();
 });
-function makeCheck(id,text,hint){
+document.getElementById('edDelete').addEventListener('click',()=>{
+  if(edCfg&&edCfg.onDelete&&confirm('Remover este item?')){edCfg.onDelete();closeEditor();}
+});
+
+/* ================= CHECKLISTS EDITÁVEIS ================= */
+/* Itens padrão podem ser editados (state.edits), ocultados (state.hidden)
+   e cada lista pode ganhar itens novos (state.custom[listKey]). */
+function effItems(listKey,builtins){
+  const ed=state.edits||{},hid=state.hidden||{};
+  const base=builtins.filter(it=>!hid[it.id]).map(it=>Object.assign({},it,ed[it.id]||{}));
+  return base.concat(normArr((state.custom||{})[listKey]));
+}
+function editItem(listKey,item){
+  openEditor({
+    title:'Editar item',
+    fields:[{key:'t',label:'Item',type:'textarea',value:item.t},
+            {key:'h',label:'Dica / detalhe (opcional)',type:'textarea',value:item.h||''}],
+    onSave:v=>{
+      if(!v.t){alert('O item não pode ficar vazio 😄');return false;}
+      if(String(item.id).charAt(0)==='c'){
+        state.custom=state.custom||{};
+        const arr=normArr(state.custom[listKey]);
+        const i=arr.findIndex(x=>x&&x.id===item.id);
+        if(i>-1){arr[i].t=v.t;arr[i].h=v.h;}
+        state.custom[listKey]=arr;
+        save();cloudSet('custom',state.custom);
+      }else{
+        state.edits=state.edits||{};
+        state.edits[item.id]={t:v.t,h:v.h};
+        save();cloudSet('edits',state.edits);
+      }
+      rerenderChecklists();
+    },
+    onDelete:()=>{
+      if(String(item.id).charAt(0)==='c'){
+        state.custom[listKey]=normArr(state.custom[listKey]).filter(x=>x&&x.id!==item.id);
+        save();cloudSet('custom',state.custom);
+      }else{
+        state.hidden=state.hidden||{};
+        state.hidden[item.id]=true;
+        save();cloudSet('hidden',state.hidden);
+      }
+      rerenderChecklists();
+    }
+  });
+}
+function addItemFlow(listKey){
+  openEditor({
+    title:'Novo item',
+    fields:[{key:'t',label:'Item',type:'textarea',value:''},
+            {key:'h',label:'Dica / detalhe (opcional)',type:'textarea',value:''}],
+    onSave:v=>{
+      if(!v.t){alert('Escreva o item 😄');return false;}
+      state.custom=state.custom||{};
+      const arr=normArr(state.custom[listKey]);
+      arr.push({id:'c'+Date.now(),t:v.t,h:v.h||''});
+      state.custom[listKey]=arr;
+      save();cloudSet('custom',state.custom);
+      rerenderChecklists();
+    }
+  });
+}
+function makeCheck(item,listKey){
   const div=document.createElement('div');div.className='check-item';
-  const cb=document.createElement('input');cb.type='checkbox';cb.id='cb_'+id;
-  cb.checked=!!state.checks[id];
+  const cb=document.createElement('input');cb.type='checkbox';cb.id='cb_'+item.id;
+  cb.checked=!!state.checks[item.id];
   if(cb.checked)div.classList.add('done');
-  const lb=document.createElement('label');lb.htmlFor='cb_'+id;
-  lb.innerHTML=text+(hint?'<span class="hint">'+hint+'</span>':'');
+  const lb=document.createElement('label');lb.htmlFor='cb_'+item.id;
+  lb.innerHTML=esc(item.t)+(item.h?'<span class="hint">'+esc(item.h)+'</span>':'');
   cb.addEventListener('change',()=>{
-    state.checks[id]=cb.checked;save();cloudSet('checks/'+id,cb.checked);
+    state.checks[item.id]=cb.checked;save();cloudSet('checks/'+item.id,cb.checked);
     div.classList.toggle('done',cb.checked);
     updateProgress();
   });
-  div.appendChild(cb);div.appendChild(lb);
+  const pen=document.createElement('button');pen.className='edit-pencil';pen.textContent='✎';pen.title='Editar item';
+  pen.addEventListener('click',()=>editItem(listKey,item));
+  div.appendChild(cb);div.appendChild(lb);div.appendChild(pen);
   return div;
 }
-function updateProgress(){
+function renderJornada(){
+  const jl=document.getElementById('jornadaLists');
+  jl.innerHTML='';
   jornada.forEach(sec=>{
-    const done=sec.items.filter(i=>state.checks[i.id]).length;
-    const el=document.getElementById('prog_'+sec.id);
-    if(el)el.textContent='· '+done+'/'+sec.items.length;
+    const card=document.createElement('div');card.className='card';
+    card.innerHTML='<h3>'+sec.title+' <span class="progress-mini" id="prog_'+sec.id+'"></span></h3><span class="when">'+sec.when+'</span>';
+    effItems('j_'+sec.id,sec.items).forEach(it=>card.appendChild(makeCheck(it,'j_'+sec.id)));
+    const add=document.createElement('button');add.className='add-item-btn';add.textContent='＋ adicionar item';
+    add.addEventListener('click',()=>addItemFlow('j_'+sec.id));
+    card.appendChild(add);
+    jl.appendChild(card);
+  });
+  updateProgress();
+}
+function renderListas(){
+  Object.keys(listas).forEach(lid=>{
+    const cont=document.getElementById(lid);
+    if(!cont)return;
+    cont.innerHTML='';
+    effItems('l_'+lid,listas[lid]).forEach(it=>cont.appendChild(makeCheck(it,'l_'+lid)));
+    const add=document.createElement('button');add.className='add-item-btn';add.textContent='＋ adicionar item';
+    add.addEventListener('click',()=>addItemFlow('l_'+lid));
+    cont.appendChild(add);
   });
 }
-updateProgress();
+function rerenderChecklists(){renderJornada();renderListas();}
+function updateProgress(){
+  jornada.forEach(sec=>{
+    const items=effItems('j_'+sec.id,sec.items);
+    const done=items.filter(i=>state.checks[i.id]).length;
+    const el=document.getElementById('prog_'+sec.id);
+    if(el)el.textContent='· '+done+'/'+items.length;
+  });
+}
 
 /* ================= MALAS / DOCS CHECKLISTS ================= */
 const listas={
@@ -884,10 +1155,8 @@ const listas={
   {id:'pp_apoio',t:'Aceitar TODA ajuda oferecida. Sério. 😄'},
  ],
 };
-Object.keys(listas).forEach(lid=>{
-  const cont=document.getElementById(lid);
-  if(cont)listas[lid].forEach(it=>cont.appendChild(makeCheck(it.id,it.t,it.h)));
-});
+renderJornada();
+renderListas();
 
 /* ================= NOTES ================= */
 document.querySelectorAll('[data-note]').forEach(el=>{
@@ -898,6 +1167,7 @@ document.querySelectorAll('[data-note]').forEach(el=>{
     clearTimeout(t);
     t=setTimeout(()=>{
       state.notes[k]=el.value;save();cloudSet('notes/'+k,el.value);
+      if(k==='n_altura'||k==='n_peso_pre')renderPeso();
       const fl=document.querySelector('[data-flash="'+k+'"]');
       if(fl){fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),1500);}
     },500);
@@ -920,6 +1190,20 @@ document.querySelectorAll('[data-radio]').forEach(group=>{
 });
 
 /* ================= TIPS ================= */
+const TIP_CATS=['Saúde','Enxoval','Parto','Pós-parto','Amamentação','Casa','Financeiro','Fé & família','Outros'];
+let tipFilter='Todas';
+function renderTipFilters(){
+  const row=document.getElementById('tipFilters');
+  if(!row)return;
+  row.innerHTML='';
+  ['Todas'].concat(TIP_CATS).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='pill'+(tipFilter===c?' selected':'');
+    b.textContent=c;
+    b.addEventListener('click',()=>{tipFilter=c;renderTipFilters();renderTips();});
+    row.appendChild(b);
+  });
+}
 function renderTips(){
   const box=document.getElementById('tipsList');
   box.innerHTML='';
@@ -927,14 +1211,35 @@ function renderTips(){
     box.innerHTML='<div class="callout">Nenhuma dica guardada ainda. Conforme médicos, família e amigos forem falando coisas boas, joguem aqui! 💡</div>';
     return;
   }
-  [...state.tips].reverse().forEach((tip)=>{
+  const list=[...state.tips].reverse().filter(t=>tipFilter==='Todas'||t.cat===tipFilter);
+  if(!list.length){
+    box.innerHTML='<div class="callout">Nenhuma dica na categoria "'+esc(tipFilter)+'" por enquanto.</div>';
+    return;
+  }
+  list.forEach(tip=>{
     const idx=state.tips.indexOf(tip);
     const el=document.createElement('div');el.className='tip-card';
-    el.innerHTML='<div class="tip-text">'+esc(tip.text)+'</div>'+
+    el.innerHTML='<div class="tip-text" style="padding-right:52px">'+esc(tip.text)+'</div>'+
       '<div class="tip-meta"><span class="tip-cat">'+esc(tip.cat)+'</span>'+esc(tip.who||'—')+' · '+tip.date+'</div>'+
-      '<button class="tip-del" title="Remover">✕</button>';
-    el.querySelector('.tip-del').addEventListener('click',()=>{
+      '<div style="position:absolute;top:8px;right:10px;display:flex;gap:2px">'+
+      '<button class="edit-pencil t-edit" title="Editar">✎</button>'+
+      '<button class="edit-pencil t-del" title="Remover">✕</button></div>';
+    el.querySelector('.t-del').addEventListener('click',()=>{
       if(confirm('Remover esta dica?')){state.tips.splice(idx,1);save();cloudSet('tips',state.tips);renderTips();}
+    });
+    el.querySelector('.t-edit').addEventListener('click',()=>{
+      openEditor({
+        title:'Editar dica',
+        fields:[{key:'text',label:'A dica',type:'textarea',value:tip.text},
+                {key:'who',label:'Quem indicou',type:'input',value:tip.who||''},
+                {key:'cat',label:'Categoria',type:'select',options:TIP_CATS,value:tip.cat}],
+        onSave:v=>{
+          if(!v.text){alert('A dica não pode ficar vazia 😄');return false;}
+          tip.text=v.text;tip.who=v.who;tip.cat=v.cat;
+          save();cloudSet('tips',state.tips);renderTips();
+        },
+        onDelete:()=>{state.tips.splice(idx,1);save();cloudSet('tips',state.tips);renderTips();}
+      });
     });
     box.appendChild(el);
   });
@@ -955,6 +1260,7 @@ document.getElementById('tipAdd').addEventListener('click',()=>{
 renderTips();
 
 /* ================= CARRINHO DE COMPRAS ================= */
+const SHOP_CATS=['Farmácia','Enxoval','Quarto do bebê','Mala da maternidade','Casa','Pós-parto','Outros'];
 if(!state.shop){
   state.shop=[
     {id:'s1',name:'Femibion 1 (28 cp)',cat:'Farmácia',note:'1 caixa/mês até 12 semanas · comparar Mevo Shop x farmácias',done:false},
@@ -985,14 +1291,30 @@ function renderShop(){
     items.forEach(item=>{
       const idx=state.shop.indexOf(item);
       const el=document.createElement('div');el.className='tip-card';
-      el.innerHTML='<div style="display:flex;gap:11px;align-items:flex-start">'+
+      el.innerHTML='<div style="display:flex;gap:11px;align-items:flex-start;padding-right:44px">'+
         '<input type="checkbox" class="shop-cb" '+(item.done?'checked':'')+'>'+
         '<div style="flex:1"><div class="tip-text" style="'+(item.done?'color:var(--sage);text-decoration:line-through;':'')+'margin-bottom:4px">'+esc(item.name)+'</div>'+
         '<div class="tip-meta"><span class="tip-cat">'+esc(item.cat)+'</span>'+(item.note?esc(item.note):'')+'</div></div></div>'+
-        '<button class="tip-del" title="Remover">✕</button>';
+        '<div style="position:absolute;top:8px;right:10px;display:flex;gap:2px">'+
+        '<button class="edit-pencil s-edit" title="Editar">✎</button>'+
+        '<button class="edit-pencil s-del" title="Remover">✕</button></div>';
       el.querySelector('input').addEventListener('change',e=>{item.done=e.target.checked;save();cloudSet('shop',state.shop);renderShop();});
-      el.querySelector('.tip-del').addEventListener('click',()=>{
+      el.querySelector('.s-del').addEventListener('click',()=>{
         if(confirm('Remover "'+item.name+'" do carrinho?')){state.shop.splice(idx,1);save();cloudSet('shop',state.shop);renderShop();}
+      });
+      el.querySelector('.s-edit').addEventListener('click',()=>{
+        openEditor({
+          title:'Editar item do carrinho',
+          fields:[{key:'name',label:'Item',type:'textarea',value:item.name},
+                  {key:'cat',label:'Categoria',type:'select',options:SHOP_CATS,value:item.cat},
+                  {key:'note',label:'Anotação (preço, onde, quando)',type:'input',value:item.note||''}],
+          onSave:v=>{
+            if(!v.name){alert('O item não pode ficar vazio 😄');return false;}
+            item.name=v.name;item.cat=v.cat;item.note=v.note;
+            save();cloudSet('shop',state.shop);renderShop();
+          },
+          onDelete:()=>{state.shop.splice(idx,1);save();cloudSet('shop',state.shop);renderShop();}
+        });
       });
       box.appendChild(el);
     });
@@ -1030,6 +1352,262 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
+
+/* ================= NUTRIÇÃO: PESO / BINGO / DIÁRIO ================= */
+function localISO(d){d=d||new Date();const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
+
+function renderPeso(){
+  const box=document.getElementById('pesoChart');if(!box)return;
+  let alt=parseFloat((state.notes.n_altura||'').replace(',','.'));
+  if(alt>3)alt=alt/100; /* aceita 164 (cm) ou 1,64 (m) */
+  const pre=parseFloat((state.notes.n_peso_pre||'').replace(',','.'));
+  const entries=normArr(state.peso).slice().sort((a,b)=>a.date<b.date?-1:1);
+  let band=null,info='';
+  if(alt>0&&pre>0){
+    const imc=pre/(alt*alt);
+    let lo,hi,cat;
+    if(imc<18.5){lo=12.5;hi=18;cat='baixo peso'}
+    else if(imc<25){lo=11.5;hi=16;cat='faixa saudável'}
+    else if(imc<30){lo=7;hi=11.5;cat='sobrepeso'}
+    else{lo=5;hi=9;cat='obesidade'}
+    band={lo,hi};
+    const f=n=>String(n).replace('.',',');
+    info='IMC pré-gestacional '+imc.toFixed(1).replace('.',',')+' ('+cat+') · ganho saudável até o fim: +'+f(lo)+' a +'+f(hi)+' kg';
+    if(entries.length){const g=entries[entries.length-1].kg-pre;info+=' · até agora: '+(g>=0?'+':'')+g.toFixed(1).replace('.',',')+' kg';}
+  }else{
+    info='⬆️ Preencha altura e peso pré-gestação para ver a faixa saudável no gráfico.';
+  }
+  document.getElementById('pesoInfo').textContent=info;
+  const W=320,H=190,mL=32,mR=8,mT=10,mB=20,w0=4,w1=41;
+  let yMin,yMax;
+  if(pre>0&&band){yMin=pre-3;yMax=pre+band.hi+3;}
+  else if(entries.length){const ks=entries.map(e=>e.kg);yMin=Math.min.apply(null,ks)-2;yMax=Math.max.apply(null,ks)+2;}
+  else{yMin=48;yMax=72;}
+  const X=w=>mL+(w-w0)/(w1-w0)*(W-mL-mR);
+  const Y=k=>H-mB-(k-yMin)/(yMax-yMin)*(H-mT-mB);
+  const wk=ds=>Math.max(w0,Math.min(w1,(new Date(ds+'T12:00:00')-DUM)/864e5/7));
+  let s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">';
+  [8,16,24,32,40].forEach(w=>{
+    s+='<line x1="'+X(w)+'" y1="'+mT+'" x2="'+X(w)+'" y2="'+(H-mB)+'" stroke="#DCE4DE"/>';
+    s+='<text x="'+X(w)+'" y="'+(H-6)+'" font-size="9" fill="#8FA69A" text-anchor="middle">'+w+'s</text>';
+  });
+  [yMin,(yMin+yMax)/2,yMax].forEach(k=>{s+='<text x="3" y="'+(Y(k)+3)+'" font-size="9" fill="#8FA69A">'+Math.round(k)+'</text>';});
+  if(pre>0&&band){
+    const lowAt=w=>w<=13?(w-4)/9*0.5:0.5+(w-13)/27*(band.lo-0.5);
+    const hiAt=w=>w<=13?(w-4)/9*2:2+(w-13)/27*(band.hi-2);
+    let up='',down='';
+    for(let w=4;w<=41;w++)up+=X(w)+','+Y(pre+hiAt(w))+' ';
+    for(let w=41;w>=4;w--)down+=X(w)+','+Y(pre+lowAt(w))+' ';
+    s+='<polygon points="'+up+down+'" fill="#E4EEE8"/>';
+    s+='<line x1="'+mL+'" y1="'+Y(pre)+'" x2="'+(W-mR)+'" y2="'+Y(pre)+'" stroke="#8FA69A" stroke-dasharray="3,3"/>';
+  }
+  if(entries.length){
+    const pts=entries.map(e=>X(wk(e.date))+','+Y(e.kg)).join(' ');
+    s+='<polyline points="'+pts+'" fill="none" stroke="#4A7C64" stroke-width="2"/>';
+    entries.forEach(e=>{s+='<circle cx="'+X(wk(e.date))+'" cy="'+Y(e.kg)+'" r="3.4" fill="#C98A90"/>';});
+  }
+  s+='</svg>';
+  box.innerHTML=s;
+  const list=document.getElementById('pesoList');
+  list.innerHTML='';
+  entries.slice(-5).reverse().forEach(e=>{
+    const row=document.createElement('div');row.className='tip-meta';
+    row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--line)';
+    row.innerHTML='<span>'+new Date(e.date+'T12:00:00').toLocaleDateString('pt-BR')+' · sem '+Math.floor(wk(e.date))+'</span>'+
+      '<span><strong>'+e.kg.toFixed(1).replace('.',',')+' kg</strong><button class="edit-pencil p-del" title="Remover">✕</button></span>';
+    row.querySelector('.p-del').addEventListener('click',()=>{
+      if(confirm('Remover este registro de peso?')){
+        state.peso=normArr(state.peso).filter(x=>x.id!==e.id);
+        save();cloudSet('peso',state.peso);renderPeso();
+      }
+    });
+    list.appendChild(row);
+  });
+}
+document.getElementById('pesoAdd').addEventListener('click',()=>{
+  const v=parseFloat((document.getElementById('pesoKg').value||'').replace(',','.'));
+  if(!v||v<30||v>200){alert('Digite um peso válido em kg 😄');return;}
+  const dt=document.getElementById('pesoData').value||localISO();
+  if(dt>localISO()){alert('A data não pode estar no futuro 😄');return;}
+  state.peso=normArr(state.peso).filter(e=>e.date!==dt);
+  state.peso.push({id:'p'+Date.now(),date:dt,kg:v});
+  save();cloudSet('peso',state.peso);
+  document.getElementById('pesoKg').value='';
+  document.getElementById('pesoData').value=localISO();
+  renderPeso();
+});
+document.getElementById('pesoData').value=localISO();
+
+const BINGO=[['prot','🍗 Proteína'],['fruta','🍎 Fruta'],['verd','🥦 Verduras'],['agua','💧 Água 2L'],
+             ['ferro','🫘 Ferro'],['calcio','🥛 Cálcio'],['vit','💊 Femibion'],['omega','🐟 Ômega-3']];
+let bingoDay=null; /* null = hoje */
+function renderBingo(){
+  const grid=document.getElementById('bingoGrid');if(!grid)return;
+  const day=bingoDay||localISO();
+  const isToday=day===localISO();
+  const d=(state.bingo||{})[day]||{};
+  const dt=new Date(day+'T12:00:00');
+  document.getElementById('bingoDate').textContent=(isToday?'Hoje, ':'')+dt.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('bingoNext').style.visibility=isToday?'hidden':'visible';
+  grid.innerHTML='';
+  let done=0;
+  BINGO.forEach(pair=>{
+    const k=pair[0],l=pair[1];
+    const b=document.createElement('button');
+    b.className='pill'+(d[k]?' selected':'');
+    b.textContent=l;
+    if(d[k])done++;
+    b.addEventListener('click',()=>{
+      state.bingo=state.bingo||{};
+      const dd=state.bingo[day]=state.bingo[day]||{};
+      dd[k]=!dd[k];
+      save();cloudSet('bingo/'+day,dd);
+      renderBingo();
+    });
+    grid.appendChild(b);
+  });
+  document.getElementById('bingoScore').textContent=done+'/'+BINGO.length+(done===BINGO.length?' — BINGO! 🎉':'');
+  const hist=document.getElementById('bingoHist');hist.innerHTML='';
+  const letras=['D','S','T','Q','Q','S','S'];
+  for(let i=6;i>=0;i--){
+    const hd=new Date();hd.setDate(hd.getDate()-i);
+    const v=(state.bingo||{})[localISO(hd)]||{};
+    const c=BINGO.filter(p=>v[p[0]]).length;
+    const pct=c/BINGO.length;
+    const el=document.createElement('span');
+    el.style.cssText='display:inline-flex;flex-direction:column;align-items:center;margin-left:8px;font-size:.62rem;color:var(--sage);gap:2px';
+    el.innerHTML='<span style="width:14px;height:14px;border-radius:50%;background:'+(pct===0?'#DCE4DE':(pct<1?'#8FBD9C':'#4A7C64'))+'"></span>'+letras[hd.getDay()];
+    hist.appendChild(el);
+  }
+}
+document.getElementById('bingoPrev').addEventListener('click',()=>{
+  const d=new Date((bingoDay||localISO())+'T12:00:00');d.setDate(d.getDate()-1);
+  bingoDay=localISO(d);renderBingo();
+});
+document.getElementById('bingoNext').addEventListener('click',()=>{
+  const d=new Date((bingoDay||localISO())+'T12:00:00');d.setDate(d.getDate()+1);
+  const nd=localISO(d);
+  bingoDay=nd>=localISO()?null:nd;renderBingo();
+});
+
+const DIARIO_TIPOS=['Café da manhã','Lanche da manhã','Almoço','Lanche da tarde','Jantar','Ceia/Extra'];
+function renderDiario(){
+  const box=document.getElementById('diarioList');if(!box)return;
+  box.innerHTML='';
+  const list=normArr(state.diario).slice().sort((a,b)=>a.dt<b.dt?1:-1).slice(0,40);
+  if(!list.length){
+    box.innerHTML='<div class="callout">Nenhum registro ainda. Alguns dias anotados antes da consulta com a nutri valem ouro. ✨</div>';
+    return;
+  }
+  let lastDay='';
+  list.forEach(en=>{
+    const day=en.dt.slice(0,10);
+    if(day!==lastDay){
+      lastDay=day;
+      const h=document.createElement('div');h.className='divider-label';
+      h.textContent=new Date(day+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'});
+      box.appendChild(h);
+    }
+    const el=document.createElement('div');el.className='tip-card';
+    el.innerHTML='<div class="tip-text" style="padding-right:52px">'+esc(en.desc)+'</div>'+
+      '<div class="tip-meta"><span class="tip-cat">'+esc(en.tipo)+'</span>'+en.dt.slice(11,16)+'</div>'+
+      '<div style="position:absolute;top:8px;right:10px;display:flex;gap:2px">'+
+      '<button class="edit-pencil d-edit" title="Editar">✎</button>'+
+      '<button class="edit-pencil d-del" title="Remover">✕</button></div>';
+    el.querySelector('.d-del').addEventListener('click',()=>{
+      if(confirm('Remover este registro?')){
+        state.diario=normArr(state.diario).filter(x=>x.id!==en.id);
+        save();cloudSet('diario',state.diario);renderDiario();
+      }
+    });
+    el.querySelector('.d-edit').addEventListener('click',()=>{
+      openEditor({
+        title:'Editar registro',
+        fields:[{key:'tipo',label:'Refeição',type:'select',options:DIARIO_TIPOS,value:en.tipo},
+                {key:'desc',label:'O que comeu/bebeu',type:'textarea',value:en.desc}],
+        onSave:v=>{
+          if(!v.desc){alert('Descreva a refeição 😄');return false;}
+          en.tipo=v.tipo;en.desc=v.desc;
+          save();cloudSet('diario',state.diario);renderDiario();
+        },
+        onDelete:()=>{
+          state.diario=normArr(state.diario).filter(x=>x.id!==en.id);
+          save();cloudSet('diario',state.diario);renderDiario();
+        }
+      });
+    });
+    box.appendChild(el);
+  });
+}
+function localNow(){const n=new Date();const p=x=>String(x).padStart(2,'0');return localISO()+'T'+p(n.getHours())+':'+p(n.getMinutes());}
+document.getElementById('diarioAdd').addEventListener('click',()=>{
+  const desc=document.getElementById('diarioDesc').value.trim();
+  if(!desc){alert('Descreva a refeição 😄');return;}
+  const quando=document.getElementById('diarioQuando').value||localNow();
+  state.diario=normArr(state.diario);
+  state.diario.push({id:'d'+Date.now(),dt:quando,
+    tipo:document.getElementById('diarioTipo').value,desc:desc});
+  save();cloudSet('diario',state.diario);
+  document.getElementById('diarioDesc').value='';
+  document.getElementById('diarioQuando').value=localNow();
+  renderDiario();
+});
+document.getElementById('diarioQuando').value=localNow();
+document.getElementById('diarioCopy').addEventListener('click',()=>{
+  const cut=new Date();cut.setDate(cut.getDate()-7);
+  const cutISO=localISO(cut);
+  const list=normArr(state.diario).filter(e=>e.dt.slice(0,10)>=cutISO).sort((a,b)=>a.dt<b.dt?-1:1);
+  if(!list.length){alert('Sem registros nos últimos 7 dias.');return;}
+  let txt='🗒️ Diário alimentar — Carolline (últimos 7 dias)\n';
+  let lastDay='';
+  list.forEach(e=>{
+    const day=e.dt.slice(0,10);
+    if(day!==lastDay){lastDay=day;txt+='\n📅 '+new Date(day+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'})+'\n';}
+    txt+='• '+e.dt.slice(11,16)+' '+e.tipo+': '+e.desc+'\n';
+  });
+  const sheet=()=>openEditor({
+    title:'📤 Relatório dos últimos 7 dias',
+    fields:[{key:'rep',label:'Toque no texto abaixo, "Selecionar tudo" e Copiar:',type:'textarea',value:txt}],
+    noSave:true
+  });
+  if(navigator.share){
+    navigator.share({text:txt}).catch(()=>sheet());
+  }else if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt)
+      .then(()=>alert('Relatório copiado! É só colar no WhatsApp da nutri. 📤'))
+      .catch(sheet);
+  }else{sheet();}
+});
+
+/* ================= CARDS DOBRÁVEIS (infos longas) ================= */
+function initFolds(){
+  const skip=['📄','👜','👶','🎒','🍼','🏠','➕'];
+  const openDefault=['🚨','📈','🎯','🗒️','📅'];
+  document.querySelectorAll('#panel-comida .card, #panel-casa .card, #panel-parto .card').forEach(card=>{
+    const h=card.querySelector(':scope > h3');
+    if(!h)return;
+    const txt=h.textContent.trim();
+    if(skip.some(s=>txt.startsWith(s)))return;
+    const body=document.createElement('div');body.className='fold-body';
+    let n=h.nextSibling;
+    while(n){const nx=n.nextSibling;body.appendChild(n);n=nx;}
+    card.appendChild(body);
+    const ar=document.createElement('span');ar.className='fold-arrow';ar.textContent='▼';
+    h.appendChild(ar);
+    card.classList.add('foldable');
+    if(!openDefault.some(s=>txt.startsWith(s)))card.classList.add('folded');
+    h.addEventListener('click',()=>card.classList.toggle('folded'));
+  });
+  /* callouts dobráveis */
+  document.querySelectorAll('.callout.foldc .foldc-head').forEach(h=>{
+    h.addEventListener('click',()=>h.parentElement.classList.toggle('folded'));
+  });
+}
+renderPeso();
+renderBingo();
+renderDiario();
+initFolds();
+renderTipFilters();
 
 /* liga a nuvem por último, com tudo renderizado */
 cloudInit();
