@@ -374,7 +374,7 @@ footer{
     <div class="acc"><div class="acc-head"><span class="t">Consulta inicial de pré-natal</span><span class="w">6–8 sem</span><span class="arrow">▼</span></div>
       <div class="acc-body">A consulta que abre tudo: o médico confirma a gestação, calcula a idade gestacional, pede o pacote de exames de sangue e a primeira ultrassom, e prescreve as vitaminas (ácido fólico é a principal). Levem a lista de dúvidas por escrito — ninguém lembra de nada na hora.</div></div>
     <div class="acc"><div class="acc-head"><span class="t">Exames de sangue e urina do 1º tri</span><span class="w">logo após a 1ª consulta</span><span class="arrow">▼</span></div>
-      <div class="acc-body">O "pacotão" inicial: hemograma (anemia), tipagem sanguínea ABO/Rh (importante se a Carolline for Rh negativo), glicemia de jejum, TSH (tireoide), sorologias (toxoplasmose, rubéola, sífilis/VDRL, HIV, hepatites B e C), exame de urina tipo 1 + urocultura (infecção urinária é comum e precisa tratar). Tudo coberto pelo plano com pedido médico.</div></div>
+      <div class="acc-body">O "pacotão" inicial: hemograma (anemia), tipagem sanguínea ABO/Rh — ✓ já saiu: <strong>Carol é O+</strong>, Rh positivo, ou seja, sem risco de incompatibilidade Rh (dispensa Coombs de rotina e imunoglobulina anti-D 🎉) —, glicemia de jejum, TSH (tireoide), sorologias (toxoplasmose, rubéola, sífilis/VDRL, HIV, hepatites B e C), exame de urina tipo 1 + urocultura (infecção urinária é comum e precisa tratar).</div></div>
     <div class="acc"><div class="acc-head"><span class="t">USG transvaginal (ultrassom de datação)</span><span class="w">6–9 sem</span><span class="arrow">▼</span></div>
       <div class="acc-body">A primeira ultrassom! Confirma que o embrião está no lugar certo, mostra o batimento cardíaco (momento emocionante 🥹) e define a idade gestacional com precisão — o que pode ajustar a DPP.</div></div>
     <div class="acc"><div class="acc-head"><span class="t">USG morfológica do 1º trimestre (translucência nucal)</span><span class="w">11–14 sem</span><span class="arrow">▼</span></div>
@@ -400,7 +400,7 @@ footer{
   <div class="card">
     <h3>3º trimestre <span class="progress-mini">(~09/01/2027 até o parto)</span></h3>
     <div class="acc"><div class="acc-head"><span class="t">Repetição de exames de sangue</span><span class="w">~28 sem</span><span class="arrow">▼</span></div>
-      <div class="acc-body">Hemograma e algumas sorologias se repetem para checar anemia e infecções. Se a Carolline for Rh negativo, entra também o Coombs indireto (e possivelmente a vacina de imunoglobulina anti-D, coberta pelo plano).</div></div>
+      <div class="acc-body">Hemograma e algumas sorologias se repetem para checar anemia e infecções. Como a Carol é Rh positivo (O+), não há necessidade de Coombs indireto de rotina nem de imunoglobulina anti-D — um cuidado a menos. Detalhe de mãe tipo O: se o bebê nascer A ou B, a maternidade só observa com mais carinho a icterícia nos primeiros dias (rotina, sem drama).</div></div>
     <div class="acc"><div class="acc-head"><span class="t">Pesquisa de Streptococcus do grupo B (GBS)</span><span class="w">35–37 sem</span><span class="arrow">▼</span></div>
       <div class="acc-body">Um swab (cotonete) vaginal/retal simples que detecta uma bactéria comum e inofensiva para a mãe, mas que pede antibiótico durante o trabalho de parto para proteger o bebê. Exame rápido e indolor.</div></div>
     <div class="acc"><div class="acc-head"><span class="t">USG obstétrica de crescimento</span><span class="w">32–36 sem</span><span class="arrow">▼</span></div>
@@ -416,10 +416,18 @@ footer{
   <div class="card">
     <h3>📖 Mini-glossário</h3>
     <div class="acc"><div class="acc-head"><span class="t">DUM, DPP, IG…</span><span class="arrow">▼</span></div>
-      <div class="acc-body"><strong>DUM</strong> = data da última menstruação (26/06/2026). <strong>DPP</strong> = data provável do parto (~02/04/2027). <strong>IG</strong> = idade gestacional, contada em semanas + dias a partir da DUM. <strong>USG</strong> = ultrassonografia. <strong>Beta-hCG</strong> = hormônio da gravidez, o exame que confirmou tudo (1640,80 no de vocês!).</div></div>
+      <div class="acc-body"><strong>DUM</strong> = data da última menstruação (26/06/2026). <strong>DPP</strong> = data provável do parto (~02/04/2027). <strong>IG</strong> = idade gestacional, contada em semanas + dias a partir da DUM. <strong>USG</strong> = ultrassonografia. <strong>Beta-hCG</strong> = hormônio da gravidez, o exame que confirmou tudo (1640,80 no de vocês!). <strong>Tipagem</strong>: Carol é O+ (Rh positivo — sem risco de incompatibilidade Rh).</div></div>
     <div class="acc"><div class="acc-head"><span class="t">Termos do parto</span><span class="arrow">▼</span></div>
       <div class="acc-body"><strong>Parto normal/vaginal</strong>: via natural, recuperação geralmente mais rápida. <strong>Cesárea</strong>: cirurgia, indicada por vários motivos ou por escolha em algumas situações. <strong>Trabalho de parto</strong>: as contrações regulares + dilatação. <strong>Bolsa rota</strong>: quando "a bolsa estoura". <strong>Doula</strong>: profissional de apoio físico/emocional (não substitui médico). <strong>Plano de parto</strong>: documento com as preferências de vocês — conversem sobre ele com o obstetra por volta de 30-34 semanas.</div></div>
   </div>
+  <div class="card">
+    <h3>🧪 Resultados de exames</h3>
+    <p class="desc">O histórico de vocês, em português. Quem interpreta oficialmente é sempre o médico — aqui é só pra chegarem na consulta sabendo o que perguntar.</p>
+    <div class="filter-row" id="exFilters"></div>
+    <div id="exList"></div>
+    <button class="add-item-btn" id="exAdd">＋ registrar resultado</button>
+  </div>
+
   <div class="card">
     <h3>💊 Medicações da gestação</h3>
     <span class="when">Receita de 31/07/2026 · Dr. Marcio Sasso · código MLA4WPP</span>
@@ -814,7 +822,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.1.3';
+const APP_BUILD='2.2.0';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -831,7 +839,7 @@ const FAMILY_ID = "baby-strauss-andrade-abr2027";
 
 /* ================= STATE ================= */
 const KEY='ninho2027';
-let state={checks:{},notes:{},radios:{},tips:[],shop:null,custom:{},edits:{},hidden:{},peso:[],bingo:{},diario:[]};
+let state={checks:{},notes:{},radios:{},tips:[],shop:null,custom:{},edits:{},hidden:{},peso:[],bingo:{},diario:[],exames:null};
 try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 
@@ -857,7 +865,7 @@ function applyRemote(){
     const k=group.getAttribute('data-radio');
     group.querySelectorAll('.pill').forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));
   });
-  renderTips();renderShop();renderPeso();renderBingo();renderDiario();
+  renderTips();renderShop();renderPeso();renderBingo();renderDiario();renderExames();
 }
 function cloudInit(){
   if(!window.firebase || !FIREBASE_CONFIG.databaseURL){ setSync('local'); return; }
@@ -868,10 +876,15 @@ function cloudInit(){
       if(!snap.exists()){ db.set(state); } /* primeiro aparelho a conectar sobe os dados locais */
       db.on('value',s=>{
         const r=s.val(); if(!r)return;
+        const seedShop=state.shop,seedEx=state.exames;
         state={checks:r.checks||{},notes:r.notes||{},radios:r.radios||{},
                tips:normArr(r.tips),shop:normArr(r.shop),
                custom:r.custom||{},edits:r.edits||{},hidden:r.hidden||{},
-               peso:normArr(r.peso),bingo:r.bingo||{},diario:normArr(r.diario)};
+               peso:normArr(r.peso),bingo:r.bingo||{},diario:normArr(r.diario),
+               exames:normArr(r.exames)};
+        /* listas semeadas que ainda não existem na nuvem: mantém e publica */
+        if(r.shop===undefined&&seedShop&&seedShop.length){state.shop=seedShop;cloudSet('shop',state.shop);}
+        if(r.exames===undefined&&seedEx&&seedEx.length){state.exames=seedEx;cloudSet('exames',state.exames);}
         save();
         applyRemote();
         setSync('on');
@@ -1358,6 +1371,95 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
   });
 });
 
+/* ================= RESULTADOS DE EXAMES ================= */
+const EX_STATUS=['✅ Normal','🌟 Imune','📋 Acompanhar','⚠️ Alterado'];
+if(!state.exames){
+  const D='31/07/2026';
+  state.exames=[
+    {id:'e01',nome:'Tipagem sanguínea',val:'O positivo',data:D,st:'✅ Normal',obs:'Rh positivo: sem risco de incompatibilidade Rh. Dispensa imunoglobulina anti-D.'},
+    {id:'e02',nome:'Hemograma',val:'Hb 13,2 · plaquetas 261 mil',data:D,st:'✅ Normal',obs:'Sem anemia. Série branca e plaquetas normais.'},
+    {id:'e03',nome:'Glicemia de jejum',val:'80 mg/dL',data:D,st:'✅ Normal',obs:'Referência 70–99. Em abril estava 88.'},
+    {id:'e04',nome:'TSH (tireoide)',val:'1,66 µUI/mL',data:D,st:'✅ Normal',obs:'Faixa do 1º trimestre: 0,05–3,70. Em abril estava 2,00.'},
+    {id:'e05',nome:'Rubéola IgG',val:'15,7 UI/mL — reagente',data:D,st:'🌟 Imune',obs:'Imunidade pela vacina. IgM 0,18 (não reagente), sem infecção ativa. 🎉'},
+    {id:'e06',nome:'Hepatite B',val:'HBsAg não reagente · Anti-HBs 29,86',data:D,st:'🌟 Imune',obs:'Não tem a doença e está protegida pela vacina.'},
+    {id:'e07',nome:'HIV',val:'Não reagente',data:D,st:'✅ Normal',obs:''},
+    {id:'e08',nome:'Sífilis (VDRL)',val:'Negativo',data:D,st:'✅ Normal',obs:'Repete no 3º trimestre, de rotina.'},
+    {id:'e09',nome:'Hepatite C',val:'Não reagente',data:D,st:'✅ Normal',obs:''},
+    {id:'e10',nome:'HTLV 1/2',val:'Não reagente',data:D,st:'✅ Normal',obs:''},
+    {id:'e11',nome:'Coombs indireto',val:'Não reagente',data:D,st:'✅ Normal',obs:''},
+    {id:'e12',nome:'Vitamina D',val:'19,0 ng/mL',data:D,st:'⚠️ Alterado',obs:'Abaixo de 20 = deficiência; ideal para gestante é 30–60. PERGUNTAR ao Dr. Marcio sobre suplementação específica.'},
+    {id:'e13',nome:'Ferritina (reserva de ferro)',val:'22,5 ng/mL',data:D,st:'📋 Acompanhar',obs:'Dentro da referência geral, mas na gestação o desejável costuma ser acima de 30. Já subiu (era 13,3 em abril). Perguntar se quer reforçar com ferro.'},
+    {id:'e14',nome:'Toxoplasmose',val:'IgG e IgM não reagentes',data:D,st:'📋 Acompanhar',obs:'NÃO é imune: manter cuidados (carne bem passada, lavar bem verduras, luvas na terra, não mexer em areia de gato — a Úrsula não transmite 🐶). Repete a cada trimestre.'},
+    {id:'e15',nome:'Citomegalovírus (CMV)',val:'IgG 204,6 (reagente) · IgM 0,86 (indeterminado)',data:D,st:'📋 Acompanhar',obs:'IgG alto indica contato antigo com o vírus (protetor). IgM ficou no limite da zona indeterminada (0,85–1,00) e o laboratório já repetiu. Perguntar ao médico sobre teste de avidez de IgG para confirmar que é infecção antiga.'},
+    {id:'e16',nome:'Urinálise + urocultura',val:'Aguardando resultado',data:D,st:'📋 Acompanhar',obs:'Estava no pedido mas não veio nos laudos — conferir no app da Paraná Clínicas antes do dia 12.'}
+  ];
+  save();
+}
+let exFilter='Todos';
+function renderExFilters(){
+  const row=document.getElementById('exFilters');if(!row)return;
+  row.innerHTML='';
+  ['Todos'].concat(EX_STATUS).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='pill'+(exFilter===c?' selected':'');
+    b.textContent=c;
+    b.addEventListener('click',()=>{exFilter=c;renderExFilters();renderExames();});
+    row.appendChild(b);
+  });
+}
+function exEditor(item){
+  openEditor({
+    title:item?'Editar resultado':'Novo resultado',
+    fields:[{key:'nome',label:'Exame',type:'input',value:item?item.nome:''},
+            {key:'val',label:'Resultado',type:'input',value:item?item.val:''},
+            {key:'data',label:'Data da coleta',type:'input',value:item?item.data:new Date().toLocaleDateString('pt-BR')},
+            {key:'st',label:'Situação',type:'select',options:EX_STATUS,value:item?item.st:EX_STATUS[0]},
+            {key:'obs',label:'Observações / o que perguntar',type:'textarea',value:item?item.obs:''}],
+    onSave:v=>{
+      if(!v.nome){alert('Dê um nome ao exame 😄');return false;}
+      if(item){item.nome=v.nome;item.val=v.val;item.data=v.data;item.st=v.st;item.obs=v.obs;}
+      else{state.exames.push({id:'e'+Date.now(),nome:v.nome,val:v.val,data:v.data,st:v.st,obs:v.obs});}
+      save();cloudSet('exames',state.exames);renderExames();
+    },
+    onDelete:item?(()=>{
+      state.exames=normArr(state.exames).filter(x=>x.id!==item.id);
+      save();cloudSet('exames',state.exames);renderExames();
+    }):null
+  });
+}
+function renderExames(){
+  const box=document.getElementById('exList');if(!box)return;
+  box.innerHTML='';
+  const all=normArr(state.exames);
+  const list=all.filter(e=>exFilter==='Todos'||e.st===exFilter);
+  if(!list.length){
+    box.innerHTML='<div class="callout">Nenhum resultado nesta categoria.</div>';
+    return;
+  }
+  const attention=list.filter(e=>e.st==='⚠️ Alterado'||e.st==='📋 Acompanhar');
+  const rest=list.filter(e=>!(e.st==='⚠️ Alterado'||e.st==='📋 Acompanhar'));
+  const add=(title,items)=>{
+    if(!items.length)return;
+    if(exFilter==='Todos'){
+      const l=document.createElement('div');l.className='divider-label';
+      l.textContent=title+' ('+items.length+')';box.appendChild(l);
+    }
+    items.forEach(e=>{
+      const el=document.createElement('div');el.className='tip-card';
+      el.innerHTML='<div class="tip-text" style="padding-right:52px"><strong>'+esc(e.nome)+'</strong>'+
+        (e.val?'<span style="display:block;font-size:.88rem;color:var(--pine-soft);margin-top:2px">'+esc(e.val)+'</span>':'')+
+        (e.obs?'<span style="display:block;font-size:.8rem;color:var(--sage);margin-top:4px">'+esc(e.obs)+'</span>':'')+'</div>'+
+        '<div class="tip-meta"><span class="tip-cat">'+esc(e.st)+'</span>'+esc(e.data||'')+'</div>'+
+        '<div style="position:absolute;top:8px;right:10px"><button class="edit-pencil x-edit" title="Editar">✎</button></div>';
+      el.querySelector('.x-edit').addEventListener('click',()=>exEditor(e));
+      box.appendChild(el);
+    });
+  };
+  add('Conversar na consulta',attention);
+  add('Tudo certo',rest);
+}
+document.getElementById('exAdd').addEventListener('click',()=>exEditor(null));
+
 /* ================= NUTRIÇÃO: PESO / BINGO / DIÁRIO ================= */
 function localISO(d){d=d||new Date();const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 
@@ -1587,7 +1689,7 @@ document.getElementById('diarioCopy').addEventListener('click',()=>{
 /* ================= CARDS DOBRÁVEIS (infos longas) ================= */
 function initFolds(){
   const skip=['📄','👜','👶','🎒','🍼','🏠','➕'];
-  const openDefault=['🚨','📈','🎯','🗒️','📅'];
+  const openDefault=['🚨','📈','🎯','🗒️','📅','🧪'];
   document.querySelectorAll('#panel-comida .card, #panel-casa .card, #panel-parto .card').forEach(card=>{
     const h=card.querySelector(':scope > h3');
     if(!h)return;
@@ -1608,6 +1710,8 @@ function initFolds(){
     h.addEventListener('click',()=>h.parentElement.classList.toggle('folded'));
   });
 }
+renderExFilters();
+renderExames();
 renderPeso();
 renderBingo();
 renderDiario();
