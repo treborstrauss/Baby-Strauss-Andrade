@@ -866,7 +866,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.5.0';
+const APP_BUILD='2.5.2';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -961,7 +961,13 @@ function updateTracker(){
   const left=Math.max(0,Math.ceil((DPP-now)/(1000*60*60*24)));
   document.getElementById('weekBig').textContent=w+' sem '+(d>0?('+ '+d+'d'):'');
   const tri=w<14?'1º trimestre':(w<28?'2º trimestre':'3º trimestre');
-  document.getElementById('weekLabel').textContent='de gestação · '+tri;
+  /* tradução para meses — a régua que todo mundo pergunta 😄 */
+  const MES=[[0,'quase 1 mês'],[4,'1 mês'],[8,'2 meses'],[13,'3 meses'],[17,'4 meses'],
+             [22,'5 meses'],[26,'6 meses'],[31,'7 meses'],[35,'8 meses'],[39,'9 meses']];
+  let mes=MES[0][1];
+  for(const m of MES){if(w>=m[0])mes=m[1];}
+  document.getElementById('weekLabel').innerHTML='de gestação · '+tri+
+    ' <span style="color:var(--blush)">· ou seja, '+mes+'</span>';
   document.getElementById('progressFill').style.width=pct+'%';
   document.getElementById('countdown').textContent=left>0?('faltam ~'+left+' dias'):'chegou a hora! 💛';
   let f=fruits[0];
