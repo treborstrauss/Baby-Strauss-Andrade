@@ -252,6 +252,25 @@ p.section-sub{color:var(--pine-soft);font-size:.9rem;margin-bottom:16px}
 .filter-row{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;-webkit-overflow-scrolling:touch}
 .filter-row .pill{white-space:nowrap;padding:7px 14px;font-size:.8rem;flex:0 0 auto}
 
+/* álbum */
+.media-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow)}
+.media-card video{width:100%;display:block;background:#000}
+.media-card .cap{padding:12px 14px}
+.media-card .cap h4{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;margin-bottom:2px}
+.media-card .cap p{font-size:.83rem;color:var(--pine-soft)}
+.foto-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.foto-grid img{width:100%;border-radius:14px;display:block;background:#000;cursor:pointer}
+.lightbox{position:fixed;inset:0;background:rgba(34,48,42,.94);z-index:300;display:none;
+  align-items:center;justify-content:center;padding:16px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:88vh;border-radius:12px}
+.marco{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.marco:last-child{border-bottom:0}
+.marco .dot{width:11px;height:11px;min-width:11px;border-radius:50%;background:var(--blush);margin-top:6px}
+.marco .txt strong{font-size:.95rem}
+.marco .txt span{display:block;font-size:.82rem;color:var(--pine-soft)}
+
 /* bingo nutricional e gráfico de peso */
 .bingo-grid{display:flex;flex-wrap:wrap;gap:8px}
 #pesoChart svg{border-radius:12px;background:#FAFBF9}
@@ -796,6 +815,78 @@ footer{
   </div>
 </section>
 
+<!-- ============ PANEL: ÁLBUM ============ -->
+<section class="panel" id="panel-album">
+  <h2 class="section-title">Nosso álbum</h2>
+  <p class="section-sub">As cenas que a gente vai querer rever mil vezes. 💛</p>
+
+  <div class="divider-label">Vídeos</div>
+
+  <div class="media-card">
+    <video src="videos/coracao-1.mp4" poster="videos/coracao-1.jpg" controls playsinline preload="none"></video>
+    <div class="cap"><h4>❤️ O coração batendo</h4><p>24/08/2026 · 8 semanas e 2 dias · 167 bpm</p></div>
+  </div>
+
+  <div class="media-card">
+    <video src="videos/coracao-2.mp4" poster="videos/coracao-2.jpg" controls playsinline preload="none"></video>
+    <div class="cap"><h4>❤️ O coração batendo · take 2</h4><p>24/08/2026 · duas semanas antes eram 108 bpm</p></div>
+  </div>
+
+  <div class="media-card">
+    <video src="videos/dancando-1.mp4" poster="videos/dancando-1.jpg" controls playsinline preload="none"></video>
+    <div class="cap"><h4>💃 Dançando</h4><p>Os primeiros movimentos — a Carol ainda não sente, mas ele já se mexe</p></div>
+  </div>
+
+  <div class="media-card">
+    <video src="videos/dancando-2.mp4" poster="videos/dancando-2.jpg" controls playsinline preload="none"></video>
+    <div class="cap"><h4>💃 Dançando · take 2</h4><p>"Movimentos: presentes, iniciais" — direto do laudo</p></div>
+  </div>
+
+  <div class="media-card">
+    <video src="videos/bebe-3d.mp4" poster="videos/bebe-3d.jpg" controls playsinline preload="none"></video>
+    <div class="cap"><h4>🧸 Em 3D</h4><p>A fase "ursinho de goma" — cabecinha, corpo curvado e os brotinhos dos braços</p></div>
+  </div>
+
+  <div class="divider-label">Fotos · 24/08 · 8 sem e 2 dias</div>
+  <div class="foto-grid" id="fotoGrid">
+    <img src="fotos/24-08_01_embriao.jpg" alt="O embrião com 18 mm">
+    <img src="fotos/24-08_03_bebe_3d.jpg" alt="O bebê em 3D">
+    <img src="fotos/24-08_02_coracao_167bpm.jpg" alt="O coração a 167 bpm" style="grid-column:1/-1">
+  </div>
+
+  <div class="divider-label">Fotos · 10/08 · 6 sem e 1 dia</div>
+  <div class="foto-grid">
+    <img src="fotos/10-08_01_ccn_39mm.jpg" alt="A primeira medida: 3,9 mm">
+    <img src="fotos/10-08_02_vesicula.jpg" alt="A vesícula vitelínica">
+    <img src="fotos/10-08_03_coracao_108bpm.jpg" alt="O primeiro batimento: 108 bpm" style="grid-column:1/-1">
+  </div>
+
+  <div class="divider-label">Exames completos</div>
+  <div class="card">
+    <p class="desc">Os links dos vídeos e laudos completos das clínicas. 🔒 Ficam salvos só na nuvem privada de vocês.</p>
+    <div id="linksList"></div>
+    <button class="add-item-btn" id="linkAdd">＋ adicionar link</button>
+  </div>
+
+  <div class="divider-label">Marcos</div>
+  <div class="card">
+    <div class="marco"><span class="dot"></span><div class="txt"><strong>30/07/2026 · 5 semanas</strong>
+      <span>Beta-hCG 1640,80 — a confirmação. 🎉</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt"><strong>10/08/2026 · 6 sem e 1 dia</strong>
+      <span>1ª ultrassom. Embrião de 3,9 mm, coração a 108 bpm. Gestação tópica, tudo normal.</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt"><strong>24/08/2026 · 8 sem e 2 dias</strong>
+      <span>2ª ultrassom no IMMEF. 18 mm (4,7× maior em 14 dias!), coração a 167 bpm e os primeiros movimentos.</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt" style="opacity:.6"><strong>~18/09/2026 · 12 semanas</strong>
+      <span>Próximo capítulo: translucência nucal com doppler.</span></div></div>
+  </div>
+
+  <div class="callout" style="margin-top:6px">
+    Para acrescentar novos vídeos e fotos: coloque os arquivos nas pastas <strong>videos/</strong> e <strong>fotos/</strong> do repositório e acrescente um bloco igual aos de cima no código. 😉
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""></div>
+
 <!-- ============ PANEL: DICAS ============ -->
 <section class="panel" id="panel-dicas">
   <h2 class="section-title">Dicas & aprendizados</h2>
@@ -840,6 +931,7 @@ footer{
     <button class="tab-btn" data-panel="panel-casa"><span class="ico">🏠</span>Casa & R$</button>
     <button class="tab-btn" data-panel="panel-parto"><span class="ico">👶</span>Parto</button>
     <button class="tab-btn" data-panel="panel-compras"><span class="ico">🛒</span>Compras</button>
+    <button class="tab-btn" data-panel="panel-album"><span class="ico">💛</span>Álbum</button>
     <button class="tab-btn" data-panel="panel-dicas"><span class="ico">💡</span>Dicas</button>
   </div>
 </nav>
@@ -866,7 +958,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.5.2';
+const APP_BUILD='2.7.0';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -883,7 +975,7 @@ const FAMILY_ID = "baby-strauss-andrade-abr2027";
 
 /* ================= STATE ================= */
 const KEY='ninho2027';
-let state={checks:{},notes:{},radios:{},tips:[],shop:null,custom:{},edits:{},hidden:{},peso:[],bingo:{},diario:[],exames:null,menu:{}};
+let state={checks:{},notes:{},radios:{},tips:[],shop:null,custom:{},edits:{},hidden:{},peso:[],bingo:{},diario:[],exames:null,menu:{},links:[]};
 try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s));}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
 
@@ -909,7 +1001,7 @@ function applyRemote(){
     const k=group.getAttribute('data-radio');
     group.querySelectorAll('.pill').forEach(b=>b.classList.toggle('selected',state.radios[k]===b.dataset.value));
   });
-  renderTips();renderShop();renderPeso();renderBingo();renderDiario();renderExames();renderSemana();
+  renderTips();renderShop();renderPeso();renderBingo();renderDiario();renderExames();renderSemana();renderLinks();
 }
 function cloudInit(){
   if(!window.firebase || !FIREBASE_CONFIG.databaseURL){ setSync('local'); return; }
@@ -925,7 +1017,7 @@ function cloudInit(){
                tips:normArr(r.tips),shop:normArr(r.shop),
                custom:r.custom||{},edits:r.edits||{},hidden:r.hidden||{},
                peso:normArr(r.peso),bingo:r.bingo||{},diario:normArr(r.diario),
-               exames:normArr(r.exames),menu:r.menu||{}};
+               exames:normArr(r.exames),menu:r.menu||{},links:normArr(r.links)};
         /* listas semeadas que ainda não existem na nuvem: mantém e publica */
         if(r.shop===undefined&&seedShop&&seedShop.length){state.shop=seedShop;cloudSet('shop',state.shop);}
         if(r.exames===undefined&&seedEx&&seedEx.length){state.exames=seedEx;cloudSet('exames',state.exames);}
@@ -1419,6 +1511,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.panel).classList.add('active');
+    document.querySelectorAll('video').forEach(v=>{try{v.pause();}catch(e){}});
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
@@ -1852,6 +1945,55 @@ document.getElementById('diarioCopy').addEventListener('click',()=>{
       .catch(sheet);
   }else{sheet();}
 });
+
+/* ================= ÁLBUM: links de exames completos ================= */
+function linkEditor(item){
+  openEditor({
+    title:item?'Editar link':'Novo link',
+    fields:[{key:'t',label:'Nome',type:'input',value:item?item.t:''},
+            {key:'d',label:'Data / detalhe',type:'input',value:item?item.d:''},
+            {key:'u',label:'Link (URL)',type:'textarea',value:item?item.u:''}],
+    onSave:v=>{
+      if(!v.u){alert('Cole o link 😄');return false;}
+      if(item){item.t=v.t;item.d=v.d;item.u=v.u;}
+      else{state.links=normArr(state.links);state.links.push({id:'l'+Date.now(),t:v.t||'Exame',d:v.d,u:v.u});}
+      save();cloudSet('links',state.links);renderLinks();
+    },
+    onDelete:item?(()=>{
+      state.links=normArr(state.links).filter(x=>x.id!==item.id);
+      save();cloudSet('links',state.links);renderLinks();
+    }):null
+  });
+}
+function renderLinks(){
+  const box=document.getElementById('linksList');if(!box)return;
+  box.innerHTML='';
+  const list=normArr(state.links);
+  if(!list.length){
+    box.innerHTML='<div class="tip-meta">Nenhum link guardado ainda.</div>';
+    return;
+  }
+  list.forEach(l=>{
+    const el=document.createElement('div');el.className='tip-card';
+    el.innerHTML='<div class="tip-text" style="padding-right:34px"><a href="'+esc(l.u)+'" target="_blank" rel="noopener" style="color:var(--euca);font-weight:700;text-decoration:none">▶ '+esc(l.t||'Exame')+'</a>'+
+      (l.d?'<span style="display:block;font-size:.82rem;color:var(--sage);margin-top:2px">'+esc(l.d)+'</span>':'')+'</div>'+
+      '<div style="position:absolute;top:8px;right:10px"><button class="edit-pencil l-edit" title="Editar">✎</button></div>';
+    el.querySelector('.l-edit').addEventListener('click',()=>linkEditor(l));
+    box.appendChild(el);
+  });
+}
+document.getElementById('linkAdd').addEventListener('click',()=>linkEditor(null));
+renderLinks();
+
+/* ================= ÁLBUM: lightbox das fotos ================= */
+(function(){
+  const lb=document.getElementById('lightbox'), lbi=document.getElementById('lightboxImg');
+  if(!lb)return;
+  document.querySelectorAll('#panel-album .foto-grid img').forEach(img=>{
+    img.addEventListener('click',()=>{lbi.src=img.src;lb.classList.add('open');});
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('open'));
+})();
 
 /* ================= CARDS DOBRÁVEIS (infos longas) ================= */
 function initFolds(){
