@@ -847,6 +847,23 @@ footer{
     <div class="cap"><h4>🧸 Em 3D</h4><p>A fase "ursinho de goma" — cabecinha, corpo curvado e os brotinhos dos braços</p></div>
   </div>
 
+  <div class="divider-label">Fotos · 22/10 · 16 sem e 6 dias</div>
+  <div class="foto-grid">
+    <img src="fotos/22-10_01_bebe_inteiro.jpg" alt="Ele inteiro, 17 cm">
+    <img src="fotos/22-10_05_perfil.jpg" alt="Perfil">
+    <img src="fotos/22-10_03_coluna.jpg" alt="A coluna vertebral">
+    <img src="fotos/22-10_04_corpo_coluna.jpg" alt="Corpo e coluna">
+    <img src="fotos/22-10_02_coracao_152bpm.jpg" alt="O coração a 152 bpm" style="grid-column:1/-1">
+  </div>
+
+  <div class="divider-label">Fotos · 21/09 · 12 sem e 3 dias</div>
+  <div class="foto-grid">
+    <img src="fotos/21-09_01_bebe_3d.jpg" alt="Em 3D com 12 semanas">
+    <img src="fotos/21-09_02_perfil.jpg" alt="Perfil na translucência nucal">
+    <img src="fotos/21-09_03_corpo.jpg" alt="O corpinho">
+    <img src="fotos/21-09_04_coracao.jpg" alt="Doppler do fluxo tricúspide">
+  </div>
+
   <div class="divider-label">Fotos · 24/08 · 8 sem e 2 dias</div>
   <div class="foto-grid" id="fotoGrid">
     <img src="fotos/24-08_01_embriao.jpg" alt="O embrião com 18 mm">
@@ -859,6 +876,17 @@ footer{
     <img src="fotos/10-08_01_ccn_39mm.jpg" alt="A primeira medida: 3,9 mm">
     <img src="fotos/10-08_02_vesicula.jpg" alt="A vesícula vitelínica">
     <img src="fotos/10-08_03_coracao_108bpm.jpg" alt="O primeiro batimento: 108 bpm" style="grid-column:1/-1">
+  </div>
+
+  <div class="divider-label">O crescimento dele</div>
+  <div class="card">
+    <p class="desc">Cada ultrassom virou um ponto. A curva é a dele.</p>
+    <div id="cresChart"></div>
+    <div id="cresList" style="margin-top:10px"></div>
+    <div class="callout foldc folded" style="margin-top:12px">
+      <div class="foldc-head"><strong>💡 Por que a curva sobe desse jeito</strong><span class="fold-arrow">▼</span></div>
+      <div class="fold-body">Crescimento no primeiro trimestre é exponencial: entre 6 e 8 semanas ele ficou 4,7× maior em duas semanas. Depois a curva começa a se acomodar — não porque ele desacelerou, mas porque agora ganha peso e massa, e não só comprimento. Por isso a partir da morfológica o acompanhamento passa a ser por peso e percentis.</div>
+    </div>
   </div>
 
   <div class="divider-label">Exames completos</div>
@@ -876,8 +904,12 @@ footer{
       <span>1ª ultrassom. Embrião de 3,9 mm, coração a 108 bpm. Gestação tópica, tudo normal.</span></div></div>
     <div class="marco"><span class="dot"></span><div class="txt"><strong>24/08/2026 · 8 sem e 2 dias</strong>
       <span>2ª ultrassom no IMMEF. 18 mm (4,7× maior em 14 dias!), coração a 167 bpm e os primeiros movimentos.</span></div></div>
-    <div class="marco"><span class="dot"></span><div class="txt" style="opacity:.6"><strong>~18/09/2026 · 12 semanas</strong>
-      <span>Próximo capítulo: translucência nucal com doppler.</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt"><strong>21/09/2026 · 12 sem e 3 dias</strong>
+      <span>Morfológica do 1º trimestre no IMMEF. TN 1,7 mm, osso nasal visualizado, ducto venoso e fluxo tricúspide normais — os quatro marcadores limpos. Colo de 37 mm e doppler das uterinas normal. E a confirmação: <strong>é menino</strong> 💙</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt"><strong>22/10/2026 · 16 sem e 6 dias</strong>
+      <span>17 cm e 214 g. Coração a 152 bpm, movimentos ativos, placenta posterior grau 0, crescimento adequado.</span></div></div>
+    <div class="marco"><span class="dot"></span><div class="txt" style="opacity:.6"><strong>13/11 a 11/12/2026 · 20 a 24 semanas</strong>
+      <span>Próximo capítulo: morfológica do 2º trimestre (ideal ~27/11). A partir de 13/11 também libera a vacina dTpa.</span></div></div>
   </div>
 
   <div class="callout" style="margin-top:6px">
@@ -958,7 +990,7 @@ footer{
    Enquanto estiver vazio, o app funciona em MODO LOCAL (sem sincronizar). */
 /* Versão do app — o verificador de atualização compara este número
    com o publicado no GitHub. É atualizado a cada nova versão do arquivo. */
-const APP_BUILD='2.7.2';
+const APP_BUILD='2.8.0';
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBarhwuXaDFiacHfC5Onc4UFUNedzdQpFU",
@@ -1954,6 +1986,45 @@ document.getElementById('diarioCopy').addEventListener('click',()=>{
       .catch(sheet);
   }else{sheet();}
 });
+
+/* ================= ÁLBUM: curva de crescimento do bebê ================= */
+/* medidas dos laudos — acrescentar uma linha a cada ultrassom nova */
+const CRESCE=[
+ {d:'2026-08-10',ig:'6 sem e 1 dia',   cm:0.39, nota:'CCN 3,9 mm · 108 bpm'},
+ {d:'2026-08-24',ig:'8 sem e 2 dias',  cm:1.8,  nota:'CCN 18 mm · 167 bpm'},
+ {d:'2026-09-21',ig:'12 sem e 3 dias', cm:5.9,  nota:'CCN 59 mm · 158 bpm · TN 1,7 mm'},
+ {d:'2026-10-22',ig:'16 sem e 6 dias', cm:17,   nota:'17 cm e 214 g · 152 bpm'}
+];
+function renderCresce(){
+  const box=document.getElementById('cresChart');if(!box)return;
+  const W=320,H=170,mL=26,mR=10,mT=12,mB=22;
+  const w0=4,w1=22,yMax=20;
+  const X=w=>mL+(w-w0)/(w1-w0)*(W-mL-mR);
+  const Y=c=>H-mB-(c/yMax)*(H-mT-mB);
+  const wk=ds=>(new Date(ds+'T12:00:00')-DUM)/864e5/7;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block;background:#FAFBF9;border-radius:12px">';
+  [4,8,12,16,20].forEach(w=>{
+    s+='<line x1="'+X(w)+'" y1="'+mT+'" x2="'+X(w)+'" y2="'+(H-mB)+'" stroke="#DCE4DE"/>';
+    s+='<text x="'+X(w)+'" y="'+(H-6)+'" font-size="9" fill="#8FA69A" text-anchor="middle">'+w+'s</text>';
+  });
+  [0,10,20].forEach(c=>{s+='<text x="3" y="'+(Y(c)+3)+'" font-size="9" fill="#8FA69A">'+c+'</text>';});
+  s+='<text x="3" y="10" font-size="8" fill="#8FA69A">cm</text>';
+  const pts=CRESCE.map(e=>X(wk(e.d))+','+Y(e.cm)).join(' ');
+  s+='<polyline points="'+pts+'" fill="none" stroke="#4A7C64" stroke-width="2"/>';
+  CRESCE.forEach(e=>{s+='<circle cx="'+X(wk(e.d))+'" cy="'+Y(e.cm)+'" r="3.6" fill="#C98A90"/>';});
+  s+='</svg>';
+  box.innerHTML=s;
+  const list=document.getElementById('cresList');
+  list.innerHTML='';
+  CRESCE.slice().reverse().forEach(e=>{
+    const row=document.createElement('div');row.className='tip-meta';
+    row.style.cssText='display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)';
+    row.innerHTML='<span><strong style="color:var(--pine)">'+esc(e.ig)+'</strong><br><span style="font-size:.78rem">'+esc(e.nota)+'</span></span>'+
+      '<span style="white-space:nowrap;font-weight:700;color:var(--euca)">'+(e.cm<1?(e.cm*10).toFixed(1).replace('.',',')+' mm':String(e.cm).replace('.',',')+' cm')+'</span>';
+    list.appendChild(row);
+  });
+}
+renderCresce();
 
 /* ================= ÁLBUM: links de exames completos ================= */
 function linkEditor(item){
